@@ -28,15 +28,10 @@ def repeated(f, n, x):
     """
     "*** YOUR CODE HERE ***"
 
-    result = None
+    result = x
     while n != 0:
-        if result == None:
-            result = f(x)
-            n -= 1
-        else:
-            result = f(result)
-            n -= 1
-
+        result = f(result)
+        n -= 1
     return result
 
 
@@ -51,6 +46,11 @@ def sum_digits(n):
     45
     """
     "*** YOUR CODE HERE ***"
+    total = 0
+    while n > 0:
+        total = total + n % 10
+        n = n // 10
+    return total
 
 def double_eights(n):
     """Return true if n has two eights in a row.
@@ -67,38 +67,14 @@ def double_eights(n):
     """
     "*** YOUR CODE HERE ***"
 
-
-def opposite(b):
-    return not b
-
-def square(x):
-    return x * x
-
-def repeated(f, n, x):
-    result = None
-    while n != 0:
-        if result == None:
-            result = f(x)
-            n -= 1
+    prev_eight = False
+    while n > 0:
+        last_digit = n % 10
+        if last_digit == 8 and prev_eight:
+            return True
+        elif last_digit == 8:
+            prev_eight = True
         else:
-            result = f(result)
-            n -= 1
-    return result
-
-
-repeated(square, 2, 3)  # square(square(3)), or 3 ** 4
-    # 81
-repeated(square, 1, 4)  # square(4)
-    #  16
-repeated(square, 6, 2)  # big number
-# 18446744073709551616
-
-repeated(opposite, 4, True)
-# True
-
-repeated(opposite, 5, True)
-# False
-repeated(opposite, 631, 1)
-# False
-repeated(opposite, 3, 0)
-#    True
+            prev_eight = False
+        n = n // 10
+    return False
