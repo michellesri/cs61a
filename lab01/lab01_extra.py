@@ -73,6 +73,16 @@ def falling(n, k):
     4
     """
     "*** YOUR CODE HERE ***"
+    total = 1
+    if k == 0:
+        return 1
+    else:
+        while k != 0:
+            total += total * (n-1)
+            k -= 1
+            n -= 1
+    return total
+
 
 # Guessing Game
 
@@ -97,6 +107,11 @@ def guess_linear():
     num_guesses = 1
     guess = LOWER
     "*** YOUR CODE HERE ***"
+    num_guesses, correct = 0, False
+    while not correct and guess != UPPER:
+        correct = is_correct(guess)   # ask user if guess is correct
+        guess += 1
+        num_guesses += 1
     return num_guesses
 
 def guess_binary():
@@ -112,6 +127,13 @@ def guess_binary():
     lower, upper = LOWER, UPPER
     guess = (lower + upper) // 2
     "*** YOUR CODE HERE ***"
+    while not is_correct(guess):
+        if is_too_high(guess):
+            upper = guess - 1
+        else:
+            lower = guess + 1
+        guess = (lower + upper) // 2
+        num_guesses += 1
     return num_guesses
 
 # Receive user input. You do not need to understand the code below this line.
