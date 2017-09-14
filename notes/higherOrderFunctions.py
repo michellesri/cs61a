@@ -46,3 +46,41 @@ def make_adder(n):
     def adder(k):
         return k + n
     return adder
+
+def outer(n):
+    def inner(m):
+        return n - m
+    return inner
+
+outer(61)
+f = outer(10)
+f(4)
+outer(5)(4)
+#
+# Implement a function keep_ints like before, but now it takes in a number n
+# and returns a function that has one parameter cond. The returned function
+# prints out all numbers from 1 . . . i . . . n where calling cond(i) returns True.
+def keep_ints(n):
+    """Returns a function which takes one parameter cond and
+    prints out all integers 1..i..n where calling cond(i)
+    returns True.
+    >>> def is_even(x):
+    ... # Even numbers have remainder 0 when divided by 2.
+    ... return x % 2 == 0
+    >>> keep_ints(5)(is_even)
+    2
+    4
+    """
+    def inner(cond):
+        counter = 1
+        while counter != n:
+            if cond(counter):
+                print counter
+            counter += 1
+    return inner
+
+
+def is_even(x):
+    return x % 2 == 0
+
+keep_ints(5)(is_even)
