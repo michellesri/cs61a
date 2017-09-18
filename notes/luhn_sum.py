@@ -1,3 +1,6 @@
+# luhn_sum and luhn_sum_double are mutually recursive
+# because they both call the other
+
 def split(n):
     return n // 10, n % 10
 # split(511) -> (51, 1)
@@ -24,5 +27,9 @@ def luhn_sum_double(n):
         return luhn_digit
     return luhn_sum(all_but_last) + luhn_digit
 
-# luhn_sum and luhn_sum_double are mutually recursive
-# because they both call the other
+def sum_digits_iterative(n):
+    digit_sum = 0
+    while n > 0:
+        n, last = split(n)
+        digit_sum += last
+    return digit_sum
