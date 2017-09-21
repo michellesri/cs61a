@@ -11,8 +11,7 @@ def lambda_curry2(func):
     >>> add_three(5)
     8
     """
-    "*** YOUR CODE HERE ***"
-    return lambda x: lambda y: func(x, y)
+    return lambda arg1: lambda arg2: func(arg1, arg2)
 
 
 # Higher Order Functions
