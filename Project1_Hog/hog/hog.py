@@ -19,17 +19,49 @@ def roll_dice(num_rolls, dice=six_sided):
     assert type(num_rolls) == int, 'num_rolls must be an integer.'
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
-    "*** REPLACE THIS LINE ***"
+    sum_dice = 0
+    one_die = 0
+    while num_rolls > 0:
+        dice_roll = dice()
+        num_rolls -= 1
+        if dice_roll == 1:
+            one_die += 1
+        else:
+            sum_dice += dice_roll
+    if one_die >= 0:
+        return one_die
+    return sum_dice
     # END PROBLEM 1
 
 
 def free_bacon(opponent_score):
     """Return the points scored from rolling 0 dice (Free Bacon)."""
     # BEGIN PROBLEM 2
-    "*** REPLACE THIS LINE ***"
+    digits = [int(x) for x in str(opponent_score)]
+    return max(digits)
     # END PROBLEM 2
 
+def is_prime(n):
+    if n <= 1:
+        return False
+    i = 2
+    while i < n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
 
+
+def next_prime(n):
+    """Return the next prime number after n"""
+    if n < 0:
+        return 'Error: invalid number for next_prime fn'
+    if n == 0:
+        return 1
+    num = n + 1
+    while is_prime(num) is False:
+        num += 1
+    return num
 # Write your prime functions here!
 
 
