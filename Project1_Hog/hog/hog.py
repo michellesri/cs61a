@@ -106,8 +106,8 @@ def reroll(dice):
     def rerolled():
         # BEGIN PROBLEM 3
         dice_outcome = dice()
-        while dice_outcome % 2 != 0:
-            dice_outcome = dice()
+        if dice_outcome % 2 != 0:
+            return dice()
         return dice_outcome
         # END PROBLEM 3
     return rerolled
