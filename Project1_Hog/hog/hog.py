@@ -20,16 +20,16 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
     sum_dice = 0
-    one_die = 0
+    one_die_count = 0
     while num_rolls > 0:
         dice_roll = dice()
         num_rolls -= 1
         if dice_roll == 1:
-            one_die += 1
+            one_die_count += 1
         else:
             sum_dice += dice_roll
-    if one_die >= 0:
-        return one_die
+    if one_die_count > 0:
+        return one_die_count
     return sum_dice
     # END PROBLEM 1
 
@@ -80,7 +80,18 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     assert opponent_score < 100, 'The game should be over.'
     # BEGIN PROBLEM 2
-    "*** REPLACE THIS LINE ***"
+    # "*** REPLACE THIS LINE ***"
+    turn_total = 0
+
+    if num_rolls == 0:
+        return free_bacon(opponent_score)
+    while num_rolls > 0:
+        turn_total += dice()
+        num_rolls -= 1
+
+    if turn_total > 25:
+        return 25 - num_rolls
+    return turn_total
     # END PROBLEM 2
 
 
@@ -88,8 +99,10 @@ def reroll(dice):
     """Return dice that return even outcomes and re-roll odd outcomes of DICE."""
     def rerolled():
         # BEGIN PROBLEM 3
-        "*** REPLACE THIS LINE ***"
-        return dice()  # Replace this statement
+        dice_outcome = dice()
+        while dice_outcome % 2 != 0:
+            dice_outcome = dice()
+        return dice_outcome
         # END PROBLEM 3
     return rerolled
 
