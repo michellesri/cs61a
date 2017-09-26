@@ -83,11 +83,13 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     # "*** REPLACE THIS LINE ***"
     turn_total = 0
 
-    if num_rolls == 0:
+    rolls = num_rolls
+
+    if rolls == 0:
         return free_bacon(opponent_score)
-    while num_rolls > 0:
+    while rolls > 0:
         turn_total += dice()
-        num_rolls -= 1
+        rolls -= 1
 
     if turn_total > 25:
         return 25 - num_rolls
