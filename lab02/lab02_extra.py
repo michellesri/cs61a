@@ -62,4 +62,22 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
-    "*** YOUR CODE HERE ***"
+    def cycle2(n):
+        def cycle3(x):
+            fn_parameters = [f1, f2, f3]
+            final_function = x
+
+            num = n
+            if num == 0:
+                return x
+
+            i = 0
+            while num > 0:
+                final_function = fn_parameters[i](final_function)
+                i += 1
+                if i >= len(fn_parameters):
+                    i = 0
+                num -= 1
+            return final_function
+        return cycle3
+    return cycle2
