@@ -38,7 +38,7 @@ def free_bacon(opponent_score):
     """Return the points scored from rolling 0 dice (Free Bacon)."""
     # BEGIN PROBLEM 2
     digits = [int(x) for x in str(opponent_score)]
-    return max(digits)
+    return max(digits) + 1
     # END PROBLEM 2
 
 def is_prime(n):
@@ -82,20 +82,19 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     # BEGIN PROBLEM 2
     rolls = num_rolls
 
+    # free bacon
     if rolls == 0:
-        free_bacon_score = free_bacon(opponent_score) + 1
-        if is_prime(free_bacon_score):
-            return next_prime(free_bacon_score)
-        return free_bacon_score
+        turn_total = free_bacon(opponent_score)
+    else:
+        turn_total = roll_dice(num_rolls, dice)
 
-    turn_total = roll_dice(num_rolls, dice)
-
-
-    if turn_total > (25 - num_rolls):
-        return 25 - num_rolls
-
+    # hogtimus prime
     if is_prime(turn_total):
-        return next_prime(turn_total)
+        turn_total = next_prime(turn_total)
+
+    # when pigs fly
+    if turn_total > (25 - num_rolls):
+        turn_total = 25 - num_rolls
 
     return turn_total
     # END PROBLEM 2
@@ -178,8 +177,6 @@ def play(strategy0, strategy1, score0=0, score1=0, goal=GOAL_SCORE):
                 score0 += 1
             else:
                 selected_dice = select_dice(score0, score1, dice_swapped)
-                if (score0 + score1) % 7 == 0: #divisible by 7
-                    selected_dice = reroll(selected_dice)
                 score0 += take_turn(num_rolls, score1, selected_dice)
         else:
             num_rolls = strategy1(score1, score0)
@@ -188,8 +185,6 @@ def play(strategy0, strategy1, score0=0, score1=0, goal=GOAL_SCORE):
                 score1 += 1
             else:
                 selected_dice = select_dice(score1, score0, dice_swapped)
-                if (score0 + score1) % 7 == 0: #divisible by 7
-                    selected_dice = reroll(selected_dice)
                 score1 += take_turn(num_rolls, score0, selected_dice)
 
         score0, score1 = swine_swap(score0, score1)
