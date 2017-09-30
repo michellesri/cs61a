@@ -40,9 +40,20 @@ def f_then_g(f, g, n):
     if n:
         f(n)
         g(n)
-# TODO: don't understand this. 
+
 grow = lambda n: f_then_g(grow, print, n//10)
 shrink = lambda n: f_then_g(print, shrink, n//10)
+
+# inverse_cascade(201)
+#   grow(201)
+#   f_then_g(grow, print, 20)
+#       f(n) -> grow(20)
+#           f_then_g(grow, print, 2)
+#              f(n) -> grow(2)
+#                   grow(2) -> f_then_g(grow, print, 0)
+#              g(n) -> print(2)
+#       g(n) -> print(20)
+
 
 
 # --------------------------------------------------
