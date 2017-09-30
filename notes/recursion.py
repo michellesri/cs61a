@@ -31,6 +31,19 @@ def cascade(n):
 # 201
 # 2013
 
+def inverse_cascade(n):
+    grow(n)
+    print(n)
+    shrink(n)
+
+def f_then_g(f, g, n):
+    if n:
+        f(n)
+        g(n)
+# TODO: don't understand this. 
+grow = lambda n: f_then_g(grow, print, n//10)
+shrink = lambda n: f_then_g(print, shrink, n//10)
+
 
 # --------------------------------------------------
 
