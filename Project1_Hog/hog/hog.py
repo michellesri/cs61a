@@ -141,6 +141,7 @@ def other(player):
     return 1 - player
 
 
+
 def play(strategy0, strategy1, score0=0, score1=0, goal=GOAL_SCORE):
     """Simulate a game and return the final scores of both players, with
     Player 0's score first, and Player 1's score second.
@@ -157,9 +158,45 @@ def play(strategy0, strategy1, score0=0, score1=0, goal=GOAL_SCORE):
     player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
     dice_swapped = False  # Whether 4-sided dice have been swapped for 6-sided
     # BEGIN PROBLEM 5
-    "*** REPLACE THIS LINE ***"
-    # END PROBLEM 5
+
+    def swine_swap(score0, score1):
+        if score0 * 2 == score1:
+            higher_score = score1
+            score1 = score0
+            score0 = higher_score
+        elif score1 * 2 == score0:
+            higher_score = score0
+            score0 = score1
+            score1 = higher_score
+        return score0, score1
+
+    while score0 < goal and score1 < goal:
+        if player == 0:
+            num_rolls = strategy0(score0, score1)
+            if num_rolls == -1:
+                dice_swapped = not dice_swapped
+                score0 += 1
+            else:
+                selected_dice = select_dice(score0, score1, dice_swapped)
+                if (score0 + score1) % 7 == 0: #divisible by 7
+                    selected_dice = reroll(selected_dice)
+                score0 += take_turn(num_rolls, score1, selected_dice)
+        else:
+            num_rolls = strategy1(score1, score0)
+            if num_rolls == -1:
+                dice_swapped = not dice_swapped
+                score1 += 1
+            else:
+                selected_dice = select_dice(score1, score0, dice_swapped)
+                if (score0 + score1) % 7 == 0: #divisible by 7
+                    selected_dice = reroll(selected_dice)
+                score1 += take_turn(num_rolls, score0, selected_dice)
+
+        score0, score1 = swine_swap(score0, score1)
+        player = other(player)
     return score0, score1
+
+
 
 
 #######################
