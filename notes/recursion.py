@@ -82,3 +82,15 @@ def play_bob(n):
 
 # >>> play_alice(20)
 # Bob wins!
+
+
+def multiply(m, n):
+"""
+>>> multiply(5, 3)
+15
+"""
+    if n == 0:
+        return 0
+    if n == 1:
+        return m
+    return m + multiply(m, n - 1)
