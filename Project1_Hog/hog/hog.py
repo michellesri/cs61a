@@ -290,8 +290,15 @@ def make_averaged(fn, num_samples=1000):
     3.75
     """
     # BEGIN PROBLEM 7
-    "*** REPLACE THIS LINE ***"
-    # END PROBLEM 7
+    def inner(*args):
+        result = 0
+        for _ in range(num_samples):
+            result += fn(*args)
+        result = result / num_samples
+        return result
+    return inner
+
+        # END PROBLEM 7
 
 
 def max_scoring_num_rolls(dice=six_sided, num_samples=1000):
