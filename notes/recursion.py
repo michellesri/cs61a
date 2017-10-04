@@ -115,4 +115,32 @@ def recursive_countup(n):
         recursive_countup(n - 1)
         print(n)
 
-    
+def sum_digits(n):
+    """
+    Write a recursive function that sums the digits of a number n. Assume n is positive.
+    You might find the operators // and modulo useful.
+
+    >>> sum_digits(7)
+    7
+    >>> sum_digits(30)
+    3
+    >>> sum_digits(228)
+    12
+    """
+    if n < 10:
+        return n
+    last = n % 10
+    all_but_last = n // 10
+    return sum_digits(all_but_last) + last
+
+# n = 265
+# all_but_last = 26
+# last = 5
+#
+# sum_digits(26) + 5
+#
+# all_but_last = 2
+# last = 6
+#
+# sum_digits(2)
+# return 2
