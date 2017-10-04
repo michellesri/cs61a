@@ -94,3 +94,11 @@ def multiply(m, n):
     if n == 1:
         return m
     return m + multiply(m, n - 1)
+
+def recursive_countdown(n):
+    if n < 1:
+        return 'invalid number'
+    if n == 1:
+        return 1
+    print n
+    return recursive_countdown(n - 1)
