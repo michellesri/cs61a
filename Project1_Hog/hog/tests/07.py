@@ -22,10 +22,11 @@ test = {
           >>> # Average of calling roll_dice 1000 times
           >>> # Enter a float (e.g. 1.0) instead of an integer
           >>> averaged_roll_dice(2, dice)
-          6.0
+          0381158de1e7a3a31f3fcfeb3944e0dc
+          # locked
           """,
           'hidden': False,
-          'locked': False
+          'locked': True
         }
       ],
       'scored': True,
