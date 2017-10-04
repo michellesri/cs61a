@@ -96,6 +96,16 @@ def multiply(m, n):
     return m + multiply(m, n - 1)
 
 def recursive_countdown(n):
+    """
+    Create a recursive countdown function that takes in an integer n and prints out a
+    countdown from n to 1.
+
+    >>> countdown(3)
+    3
+    2
+    1
+    """
+
     if n >= 0:
         print n
         recursive_countdown(n - 1)
@@ -104,3 +114,5 @@ def recursive_countup(n):
     if n >= 0:
         recursive_countup(n - 1)
         print(n)
+
+    
