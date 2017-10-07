@@ -298,6 +298,14 @@ def make_averaged(fn, num_samples=1000):
         return result
     return inner
 
+# newFn = make_averaged(roll_dice, num_samples)
+# def inner(dice=1, 3, num_rolls=1):
+#     result = 0
+#     for _ in range(1000):
+#         result += roll_dice(dice, num_rolls=1)
+#     result = result / 1000
+#     return result
+
         # END PROBLEM 7
 
 
@@ -311,7 +319,16 @@ def max_scoring_num_rolls(dice=six_sided, num_samples=1000):
     10
     """
     # BEGIN PROBLEM 8
-    "*** REPLACE THIS LINE ***"
+    highest = 0
+    best_num_rolls = 0
+    for i in range(1, 11):
+        averaged_val = make_averaged(roll_dice, num_samples)(i, dice)
+        if averaged_val > highest:
+            highest = averaged_val
+            best_num_rolls = i
+    return best_num_rolls
+
+
     # END PROBLEM 8
 
 
