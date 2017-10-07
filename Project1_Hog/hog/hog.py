@@ -378,8 +378,12 @@ def bacon_strategy(score, opponent_score, margin=8, num_rolls=4):
     and rolls NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 9
-    "*** REPLACE THIS LINE ***"
-    return 4  # Replace this statement
+    bacon_score = free_bacon(opponent_score)
+    if is_prime(bacon_score):
+        bacon_score = next_prime(bacon_score)
+    if bacon_score >= margin:
+        return 0
+    return num_rolls
     # END PROBLEM 9
 check_strategy(bacon_strategy)
 
