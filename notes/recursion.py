@@ -144,3 +144,50 @@ def sum_digits(n):
 #
 # sum_digits(2)
 # return 2
+
+def count_stairways(n):
+    """
+    I want to go up a flight of stairs that has n steps.
+    I can either take 1 or 2 steps each
+    time. How many different ways can I go up this flight of stairs?
+    Write a function count stair ways that solves this
+    problem for me. Assume n is positive.
+    """
+
+    if n == 1 or n == 2:
+        return n
+    elif n < 0:
+        return 0
+
+    return count_stairways(n - 1) + count_stairways(n - 2)
+
+# Consider a special version of the count stairways problem,
+# where instead of taking 1 or 2 steps, we are able to take up
+# to and including k steps at a time.
+# Write a function count k that figures out the number
+# of paths for this scenario.
+
+def count_k(n, k):
+    """
+    >>> count_k(3, 3) # 3, 2 + 1, 1 + 2, 1 + 1 + 1
+    4
+    >>> count_k(4, 4)
+    8
+    >>> count_k(10, 3)
+    274
+    >>> count_k(300, 1) # Only one step at a time
+    1
+    """
+    # if n == 0:
+    #     return 1
+    if n == 1:
+        return n
+    total = 0
+    for i in range(1, k + 1):
+        if i > n:
+            break
+        if i == n:
+            total += 1
+        else:
+            total += count_k(n - i, k)
+    return total
