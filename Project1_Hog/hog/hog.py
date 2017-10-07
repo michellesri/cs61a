@@ -393,9 +393,11 @@ def swap_strategy(score, opponent_score, margin=8, num_rolls=4):
     rolls 0 dice if it gives at least MARGIN points. Otherwise, it rolls
     NUM_ROLLS.
     """
-    # BEGIN PROBLEM 10
-    "*** REPLACE THIS LINE ***"
-    return 4  # Replace this statement
+    if opponent_score * 2 == score:
+        return 0
+    if bacon_strategy(score, opponent_score, margin, num_rolls) == 0:
+        return 0
+    return num_rolls
     # END PROBLEM 10
 check_strategy(swap_strategy)
 
