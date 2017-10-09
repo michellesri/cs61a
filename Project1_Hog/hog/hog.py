@@ -3,6 +3,8 @@
 from dice import four_sided, six_sided, make_test_dice
 from ucb import main, trace, log_current_line, interact
 
+import math
+
 GOAL_SCORE = 100  # The goal of Hog is to score 100 points.
 
 
@@ -139,7 +141,7 @@ def other(player):
     """
     return 1 - player
 
-
+dice_swapped = False
 
 def play(strategy0, strategy1, score0=0, score1=0, goal=GOAL_SCORE):
     """Simulate a game and return the final scores of both players, with
@@ -154,6 +156,8 @@ def play(strategy0, strategy1, score0=0, score1=0, goal=GOAL_SCORE):
     score0   :  The starting score for Player 0
     score1   :  The starting score for Player 1
     """
+
+    global dice_swapped
     player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
     dice_swapped = False  # Whether 4-sided dice have been swapped for 6-sided
     # BEGIN PROBLEM 5
@@ -331,6 +335,27 @@ def max_scoring_num_rolls(dice=six_sided, num_samples=1000):
 
     # END PROBLEM 8
 
+def max_scoring_turn(dice=six_sided, num_samples=1000):
+    """Return the number of dice (1 to 10) that gives the highest average turn
+    score by calling roll_dice with the provided DICE over NUM_SAMPLES times.
+    Assume that the dice always return positive outcomes.
+
+    >>> dice = make_test_dice(3)
+    >>> max_scoring_num_rolls(dice)
+    10
+    """
+    highest = 0
+    best_num_rolls = 0
+    for i in range(1, 11):
+        # passing in 0 for opponent score because we don't want to take
+         # into account free bacon
+        averaged_val = make_averaged(take_turn, num_samples)(i, 0, dice)
+        if averaged_val > highest:
+            highest = averaged_val
+            best_num_rolls = i
+    return best_num_rolls
+#take_turn(num_rolls, opponent_score, dice)
+
 
 def winner(strategy0, strategy1):
     """Return 0 if strategy0 wins against strategy1, and 1 otherwise."""
@@ -353,20 +378,35 @@ def average_win_rate(strategy, baseline=always_roll(4)):
 
 def run_experiments():
     """Run a series of strategy experiments and report results."""
-    if True:  # Change to False when done finding max_scoring_num_rolls
+    if False:  # Change to False when done finding max_scoring_num_rolls
         six_sided_max = max_scoring_num_rolls(six_sided)
         print('Max scoring num rolls for six-sided dice:', six_sided_max)
         rerolled_max = max_scoring_num_rolls(reroll(six_sided))
         print('Max scoring num rolls for re-rolled dice:', rerolled_max)
 
+    if False:  # Change to False when done finding max_scoring_num_rolls
+        six_sided_max = max_scoring_turn(six_sided, 10000)
+        four_sided_max = max_scoring_turn(four_sided, 10000)
+        print('Max scoring num rolls for six-sided dice:', six_sided_max)
+        print('Max scoring num rolls for four-sided dice:', four_sided_max)
+
+        rerolled_max_six_sided = max_scoring_turn(reroll(six_sided))
+        rerolled_max_four_sided = max_scoring_turn(reroll(four_sided))
+
+        print('Max scoring num rolls for re-rolled dice six_sided', rerolled_max_six_sided)
+        print('Max scoring num rolls for re-rolled dice four_sided', rerolled_max_four_sided)
+
+
     if False:  # Change to True to test always_roll(8)
-        print('always_roll(8) win rate:', average_win_rate(always_roll(8)))
+        print('always_roll(8) win rate:', average_win_rate(always_roll(8))) #21%
 
     if False:  # Change to True to test bacon_strategy
-        print('bacon_strategy win rate:', average_win_rate(bacon_strategy))
+        print('bacon_strategy win rate:', average_win_rate(bacon_strategy)) #51.8%
 
     if False:  # Change to True to test swap_strategy
-        print('swap_strategy win rate:', average_win_rate(swap_strategy))
+        print('swap_strategy win rate:', average_win_rate(swap_strategy)) #46%
+
+    print('My strategy win rate:', average_win_rate(final_strategy))
 
     "*** You may add additional experiments as you wish ***"
 
@@ -382,6 +422,7 @@ def bacon_strategy(score, opponent_score, margin=8, num_rolls=4):
     if is_prime(bacon_score):
         bacon_score = next_prime(bacon_score)
     if bacon_score >= margin:
+        #and (score + opponent_score + bacon_score) % 7 != 0
         return 0
     return num_rolls
     # END PROBLEM 9
@@ -393,9 +434,8 @@ def swap_strategy(score, opponent_score, margin=8, num_rolls=4):
     rolls 0 dice if it gives at least MARGIN points. Otherwise, it rolls
     NUM_ROLLS.
     """
-    if opponent_score * 2 == score:
-        return 0
-    if bacon_strategy(score, opponent_score, margin, num_rolls) == 0:
+    if opponent_score * 2 == score or \
+    bacon_strategy(score, opponent_score, margin, num_rolls) == 0:
         return 0
     return num_rolls
     # END PROBLEM 10
@@ -403,14 +443,45 @@ check_strategy(swap_strategy)
 
 
 def final_strategy(score, opponent_score):
-    """Write a brief description of your final strategy.
+    """Strategy:
+    Force the dice to be a 4 sided so that there is a lower chance of getting a 1.
+    Check if hog wild is in play.
+    Roll more if hog wild.
+    If opponent is leading by 1.5x, lower our margin.
+    If opponent score is 2x, swap scores.
 
-    *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 11
-    "*** REPLACE THIS LINE ***"
-    return 4  # Replace this statement
-    # END PROBLEM 11
+    if score == 0:
+        return -1
+
+    is_hog_wild = (score + opponent_score) % 7 == 0
+    # is_six_sided = not dice_swapped
+
+    if is_hog_wild:
+        # if is_six_sided:
+        #     num_rolls = 5
+        #     margin = 1
+        # else: #four sided
+        num_rolls = 6
+        margin = 8
+    else:
+        # if is_six_sided:
+        #     num_rolls = 4
+        #     margin = 10
+        # else: #four sided
+        num_rolls = 4
+        margin = 6
+
+    margin = min(margin, 100 - score)
+
+    if opponent_score * 1.5 <= score:
+        margin = min(5, 100 - score)
+
+    if swap_strategy(score, opponent_score, margin, num_rolls) == 0:
+        return 0
+
+    return num_rolls
 check_strategy(final_strategy)
 
 
