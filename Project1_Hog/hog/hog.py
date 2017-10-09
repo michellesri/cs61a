@@ -447,7 +447,7 @@ def final_strategy(score, opponent_score):
     Force the dice to be a 4 sided so that there is a lower chance of getting a 1.
     Check if hog wild is in play.
     Roll more if hog wild.
-    If opponent is leading by 1.5x, lower our margin.
+    If we are leading by at least 1.5x, lower our margin.
     If opponent score is 2x, swap scores.
 
     """
