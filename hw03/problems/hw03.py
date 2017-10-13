@@ -1,5 +1,7 @@
 HW_SOURCE_FILE = 'hw03.py'
 
+import math
+
 #############
 # Questions #
 #############
@@ -24,6 +26,7 @@ def accumulate(combiner, base, n, term):
     two-argument commutative function.
 
     >>> accumulate(add, 0, 5, identity)  # 0 + 1 + 2 + 3 + 4 + 5
+    # (((((0 + 5) + 4) + 3) + 2) + 1)
     15
     >>> accumulate(add, 11, 5, identity) # 11 + 1 + 2 + 3 + 4 + 5
     26
@@ -60,7 +63,7 @@ def summation_using_accumulate(n, term):
     True
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return accumulate(add, 0, n, term)
 
 def product_using_accumulate(n, term):
     """An implementation of product using accumulate.
@@ -75,7 +78,7 @@ def product_using_accumulate(n, term):
     True
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return accumulate(mul, 1, n, term)
 
 def filtered_accumulate(combiner, base, pred, n, term):
     """Return the result of combining the terms in a sequence of N terms
