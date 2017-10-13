@@ -41,6 +41,8 @@ def is_fib(n):
     >>> is_fib(9)
     False
     """
+    if n == 0:
+        return True
     x, y = 0, 1
     total = x + y
 
@@ -48,5 +50,4 @@ def is_fib(n):
         x = y
         y = total
         total = x + y
-
     return total == n
