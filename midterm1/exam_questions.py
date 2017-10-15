@@ -42,18 +42,15 @@ def count_one(n):
     1
     """
 
-    total_ones = 0
+    one_count = 0
     num = n
 
-    while num > 10:
+    while num > 0:
         last_digit = num % 10 # last digit
         num = num // 10 # all but last digit
         if last_digit == 1:
-            total_ones += 1
-    if num < 10:
-        if num == 1:
-            total_ones += 1
-    return total_ones
+            one_count += 1
+    return one_count
 
 def count_one_recursive(n):
     """Counts the number of 1s in the digits of n
@@ -73,7 +70,33 @@ def count_one_recursive(n):
             return 1
         return 0
 
-    return count_one_recursive(n % 10) + count_one_recursive(n // 10)
+    last_digit = 0
+    if n % 10 == 1:
+        last_digit = 1
+    return last_digit + count_one_recursive(n // 10)
+
+def total_ones(n):
+    """Returns number of 1s in the digits of all numbers from 1 to
+    n.
+
+    >>> total_ones(10) # 1, 10 -> two 1s
+    2
+    >>> total_ones(15) # 1, 10, 11, 12, 13, 14, 15 -> eight 1s
+    8
+    >>> total_ones(21)
+    13
+    """
+    if n < 10:
+        return 1
+
+    one_count = 0
+    digits = [int(x) for x in str(n)]
+    for digit in digits:
+        if digit == 1:
+            one_count += 1
+
+    return one_count + total_ones(n - 1)
+
 
 if __name__ == "__main__":
     import doctest
