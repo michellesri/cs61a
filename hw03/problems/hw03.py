@@ -128,7 +128,14 @@ def repeated(f, n):
     >>> repeated(square, 0)(5)
     5
     """
-    "*** YOUR CODE HERE ***"
+    def inner(x):
+        counter = 0
+        result = x
+        while counter < n:
+            result = f(result)
+            counter += 1
+        return result
+    return inner
 
 def compose1(f, g):
     """Return a function h, such that h(x) = f(g(x))."""
