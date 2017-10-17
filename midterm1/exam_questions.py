@@ -98,6 +98,7 @@ def total_ones(n):
     return one_count + total_ones(n - 1)
 
 
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()

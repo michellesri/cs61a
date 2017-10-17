@@ -51,3 +51,20 @@ def is_fib(n):
         y = total
         total = x + y
     return total == n
+
+# Write a function make_mod that takes a number, n, as an argument, and returns a new function.
+# The new function should take a single argument, x, and return the result of x modulo n.
+
+def make_mod(n):
+    """Returns a function that takes an argument x.
+    That function will return x modulo n.
+    >>> mod_7 = make_mod(7)
+    >>> mod_7(3)
+    3
+    >>> mod_7(41)
+    6
+    """
+
+    def inner(x):
+        return x % n
+    return inner
