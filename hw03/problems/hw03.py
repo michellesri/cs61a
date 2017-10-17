@@ -101,8 +101,10 @@ def filtered_accumulate(combiner, base, pred, n, term):
     ...       ['While', 'For', 'Recursion'])
     True
     """
-    def combine_if(x, y):
-        "*** YOUR CODE HERE ***"
+    def combine_if(current_total, current_value):
+        if pred(current_value):
+            current_total = combiner(current_total, current_value)
+        return current_total
     return accumulate(combine_if, base, n, term)
 
 def odd(x):
