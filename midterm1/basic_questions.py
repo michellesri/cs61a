@@ -68,3 +68,21 @@ def make_mod(n):
     def inner(x):
         return x % n
     return inner
+
+# Implement a function geo_sum that takes
+# three numbers a and r (as defined above) and n, and
+# calculates the sum of the first n elements of the geometric
+# series defined by a and r. Use recursion!
+
+def geo_sum(a, r, n):
+    """Returns the first n elements of a geometric series.
+
+    >>> geo_sum(1, 1/2, 4)  # 1 + 1/2 + 1/4 + 1/8
+    1.875
+    >>> geo_sum(2, 2, 3)  # 2 + 4 + 8
+    14
+    """
+
+    if n == 1:
+        return a
+    return a + geo_sum(a * r, r, n - 1)
