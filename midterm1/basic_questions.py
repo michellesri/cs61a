@@ -117,3 +117,34 @@ def num_primes(n):
         if is_prime(n):
             count += 1
     return count + num_primes(n - 1)
+
+# Implement a function any which takes two numbers a and b and a predicate function pred,
+# and returns True if any number from a to b inclusive satisfies pred
+# (i.e. return True if there exists some number i such that a < i < b and
+#  pred(i) returns True). You may assume a < b. Use recursion!
+
+def any(a, b, pred):
+    """Returns True if any numbers from a to b inclusive satisfy
+    pred.
+
+    >>> any(1, 4, lambda x: x % 2 == 0)
+    True
+    >>> any(-5, 2, lambda x: x * x == -3 * x)   # -3 satisfies pred
+    True
+    >>> any(1, 6, lambda x: x % 7 == 0)
+    False
+    >>> any(0, 6, lambda x: x % 7 == 0)
+    True
+    """
+
+    if pred(a):
+        return True
+
+    if a < b:
+        return any(a + 1, b, pred)
+    return False
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
