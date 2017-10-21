@@ -86,3 +86,34 @@ def geo_sum(a, r, n):
     if n == 1:
         return a
     return a + geo_sum(a * r, r, n - 1)
+
+# Implement a function num_primes which takes a number n and returns the
+# number of prime numbers less than or equal to n. You can assume there
+# is already a function is_prime that takes in a number i and returns
+# True if i is prime, and False otherwise. Use recursion!
+
+def is_prime(i):
+    m = 2
+    while m * m <= i:
+        if i % m == 0:
+            return False
+        m += 1
+    return True
+
+def num_primes(n):
+    """Returns the number of primes less than or equal to n.
+
+    >>> num_primes(6)   # 2, 3, 5
+    3
+    >>> num_primes(13)  # 2, 3, 5, 7, 11, 13
+    6
+    """
+    count = 0
+
+    if n <= 1:
+        return 0
+
+    if n > 1:
+        if is_prime(n):
+            count += 1
+    return count + num_primes(n - 1)
