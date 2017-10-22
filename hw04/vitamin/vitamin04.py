@@ -1,3 +1,5 @@
+import math
+
 def intersection(st, ave):
     """Represent an intersection using the Cantor pairing function."""
     return (st+ave)*(st+ave+1)//2 + ave
@@ -33,4 +35,10 @@ def squares(s):
     >>> squares(seq)
     []
     """
-    "*** YOUR CODE HERE ***"
+    perfect_squares = []
+    for num in range(0, len(s)):
+        list_num = s[num]
+        root = math.sqrt(list_num)
+        if int(root + 0.5) ** 2 == list_num:
+            perfect_squares.append(int(root))
+    return perfect_squares
