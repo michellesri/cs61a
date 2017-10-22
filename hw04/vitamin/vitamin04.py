@@ -22,7 +22,13 @@ def taxicab(a, b):
     >>> taxicab(ess_a_bagel, times_square)
     9
     """
-    "*** YOUR CODE HERE ***"
+    street_a = street(a)
+    street_b = street(b)
+
+    ave_a = avenue(a)
+    ave_b = avenue(b)
+
+    return abs(street_a - street_b) + abs(ave_a - ave_b)
 
 def squares(s):
     """Returns a new list containing square roots of the elements of the
