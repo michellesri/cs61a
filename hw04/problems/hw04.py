@@ -1,5 +1,6 @@
 HW_SOURCE_FILE = 'hw04.py'
 
+
 def g(n):
     """Return the value of G(n), computed recursively.
 
@@ -17,7 +18,10 @@ def g(n):
     >>> check(HW_SOURCE_FILE, 'g', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if n <= 3:
+        return n
+    if n > 3:
+        return g(n - 1) + 2 * g(n - 2) + 3 * g(n - 3)
 
 def g_iter(n):
     """Return the value of G(n), computed iteratively.
