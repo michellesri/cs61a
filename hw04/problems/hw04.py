@@ -40,7 +40,20 @@ def g_iter(n):
     >>> check(HW_SOURCE_FILE, 'g_iter', ['Recursion'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    g_values = [0, 1, 2, 3]
+    current_num = 4
+
+    if n <= 3:
+        return n
+
+    while current_num <= n:
+        g_values.append(g_values[current_num - 1] + 2 \
+            * g_values[current_num - 2] + 3 * g_values[current_num - 3])
+
+        current_num += 1
+
+    return g_values[n]
+
 
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
