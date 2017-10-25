@@ -86,22 +86,37 @@ def pingpong(n):
     >>> check(HW_SOURCE_FILE, 'pingpong', ['Assign', 'AugAssign'])
     True
     """
-    direction = True
-    current_series_val = 0
-    i = 1
-    while i <= n:
-
-        if direction:
-            current_series_val += 1
-        else:
-            current_series_val -= 1
+    # direction = True
+    # current_series_val = 0
+    # i = 1
+    # while i <= n:
+    #
+    #     if direction:
+    #         current_series_val += 1
+    #     else:
+    #         current_series_val -= 1
+    #
+    #     if has_seven(i) or i % 7 == 0:
+    #         direction = not direction
+    #
+    #     i += 1
+    #
+    # return current_series_val
+    def recursive(i, current_value, direction):
+        if i == n:
+            return current_value
 
         if has_seven(i) or i % 7 == 0:
-            direction = not direction
+            if direction:
+                return recursive(i + 1, current_value - 1, False)
+            return recursive(i + 1, current_value + 1, True)
+        else:
+            if direction:
+                return recursive(i + 1, current_value + 1, True)
+            return recursive(i + 1, current_value - 1, False)
 
-        i += 1
+    return recursive(1, 1, True)
 
-    return current_series_val
 
 
 def has_seven(k):
