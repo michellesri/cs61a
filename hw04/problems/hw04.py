@@ -86,7 +86,23 @@ def pingpong(n):
     >>> check(HW_SOURCE_FILE, 'pingpong', ['Assign', 'AugAssign'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    direction = True
+    current_series_val = 0
+    i = 1
+    while i <= n:
+
+        if direction:
+            current_series_val += 1
+        else:
+            current_series_val -= 1
+
+        if has_seven(i) or i % 7 == 0:
+            direction = not direction
+
+        i += 1
+
+    return current_series_val
+
 
 def has_seven(k):
     """Returns True if at least one of the digits of k is a 7, False otherwise.
