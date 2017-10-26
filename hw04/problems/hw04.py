@@ -154,7 +154,18 @@ def count_change(amount):
     >>> count_change(100)
     9828
     """
-    "*** YOUR CODE HERE ***"
+    if amount == 0:
+        return 0
+    elif amount == 1:
+        return 1
+
+    total = 0
+    power = 1
+    n = amount
+    while n > 0:
+        
+
+
 
 ###################
 # Extra Questions #
