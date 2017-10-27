@@ -60,7 +60,14 @@ def ab_plus_c(a, b, c):
     >>> ab_plus_c(3, 0, 2)  # 3 * 0 + 2
     2
     """
-    "*** YOUR CODE HERE ***"
+    a = min(a, b)
+    b = max(a, b)
+    a_b_total = 0
+    while a > 0:
+        a_b_total += b
+        a -= 1
+    return a_b_total + c
+
 
 def is_prime(n):
     """Returns True if n is a prime number and False otherwise.
