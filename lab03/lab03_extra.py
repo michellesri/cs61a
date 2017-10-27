@@ -44,7 +44,10 @@ def count_up(n):
     5
     """
     def counter(i):
-        "*** YOUR CODE HERE ***"
+        while i < n:
+            print(i)
+            i += 1
+        print(n)
     counter(1)
 
 def ab_plus_c(a, b, c):
