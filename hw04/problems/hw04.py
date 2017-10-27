@@ -142,6 +142,12 @@ def has_seven(k):
     else:
         return has_seven(k // 10)
 
+def highest_power_of_2_smaller_than_n(n):
+    x = 2
+    while x * 2 <= n:
+        x = x * 2
+    return x
+
 def count_change(amount):
     """Return the number of ways to make change for amount.
 
@@ -154,19 +160,15 @@ def count_change(amount):
     >>> count_change(100)
     9828
     """
-    if amount == 0:
-        return 0
-    elif amount == 1:
-        return 1
 
-    total = 0
-    power = 1
-    n = amount
-    while n > 0:
-        
+    def helper(current_amount, highest_denom_possible):
+        count = 0
+        if current_amount == 2 or highest_denom_possible == 2:
+            return 1
+        for i in range(1 + current_amount / highest_denom_possible):
+            count += helper(current_amount - highest_denom_possible * i, highest_denom_possible / 2)
 
-
-
+        return count
 ###################
 # Extra Questions #
 ###################
