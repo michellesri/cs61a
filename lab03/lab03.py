@@ -11,12 +11,11 @@ def gcd(a, b):
     >>> gcd(40, 40)
     40
     """
-    a = max(a, b)
-    b = min(a, b)
+
+    a, b = max(a, b), min(a, b)
     if a % b == 0:
         return b
-    return gcd()
-
+    return gcd(b, a % b)
 
 
 def hailstone(n):
