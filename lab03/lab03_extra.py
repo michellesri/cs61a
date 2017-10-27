@@ -5,6 +5,13 @@ def is_palindrome(n):
     Fill in the blanks '_____' to check if a number
     is a palindrome.
 
+    12321
+    1, 1232
+    12, 123
+    123, 12
+    1232, 1
+    12321, _
+
     >>> is_palindrome(12321)
     True
     >>> is_palindrome(42)
@@ -15,9 +22,9 @@ def is_palindrome(n):
     True
     """
     x, y = n, 0
-    f = lambda: _____
+    f = lambda: (x % 10) + y * 10
     while x > 0:
-        x, y = _____, f()
+        x, y = x // 10, f()
     return y == n
 
 def skip_mul(n):
@@ -79,11 +86,14 @@ def is_prime(n):
     >>> is_prime(521)
     True
     """
-    if n == 1 or n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    return is_prime(n - 1)
+    def helper(i):
+        if n == i:
+            return True
+        if n % i == 0:
+            return False
+        return helper(i + 1)
+    return helper(2)
+
 
 def interleaved_sum(n, odd_term, even_term):
     """Compute the sum odd_term(1) + even_term(2) + odd_term(3) + ..., up
