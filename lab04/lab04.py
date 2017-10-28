@@ -91,8 +91,17 @@ def closer_city(lat, lon, city1, city2):
     >>> closer_city(41.29, 174.78, bucharest, vienna)
     'Bucharest'
     """
-    "*** YOUR CODE HERE ***"
+    # lat_city1 = get_lat(city1)
+    # lon_city1 = get_lon(city1)
+    #
+    # lat_city2 = get_lat(city2)
+    # lon_city2 = get_lon(city2)
 
+    destination_city = make_city('destination_city', lat, lon)
+
+    if distance(destination_city, city1) < distance(destination_city, city2):
+        return get_name(city1)
+    return get_name(city2)
 # Connect N: Q6-11
 ######################
 ### Connect N Game ###
