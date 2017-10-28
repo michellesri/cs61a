@@ -67,7 +67,14 @@ def distance(city1, city2):
     >>> distance(city3, city4)
     5.0
     """
-    "*** YOUR CODE HERE ***"
+    # sqrt of (x1 - x2)**2 + (y1 - y2)**2
+    lat_city1 = get_lat(city1)
+    lon_city1 = get_lon(city1)
+
+    lat_city2 = get_lat(city2)
+    lon_city2 = get_lon(city2)
+
+    return sqrt((lat_city1 - lat_city2)**2 + (lon_city1 - lon_city2)**2)
 
 # Q5
 def closer_city(lat, lon, city1, city2):
