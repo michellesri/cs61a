@@ -12,7 +12,11 @@ def if_this_not_that(i_list, this):
     4
     5
     """
-    "*** YOUR CODE HERE ***"
+    for i in range(len(i_list)):
+        if i_list[i] > this:
+            print(i_list[i])
+        else:
+            print('that')
 
 # Q4
 def make_city(name, lat, lon):
