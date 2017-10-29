@@ -153,8 +153,7 @@ def get_piece(board, row, column):
     >>> get_piece(board, 1, 1)
     '-'
     """
-    "*** YOUR CODE HERE ***"
-    return _______
+    return board[row][column]
 
 
 def put_piece(board, max_rows, column, player):
