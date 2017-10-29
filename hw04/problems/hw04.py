@@ -21,7 +21,11 @@ def g(n):
     if n <= 3:
         return n
     if n > 3:
-        return g(n - 1) + 2 * g(n - 2) + 3 * g(n - 3)
+        result = 0
+        for i in range(1, 4):
+            result += i * g(n - i)
+        return result
+        # return g(n - 1) + 2 * g(n - 2) + 3 * g(n - 3)
 
 def g_iter(n):
     """Return the value of G(n), computed iteratively.
@@ -162,13 +166,22 @@ def count_change(amount):
     """
 
     def helper(current_amount, highest_denom_possible):
-        count = 0
-        if current_amount == 2 or highest_denom_possible == 2:
+        if current_amount == 1 or highest_denom_possible == 1:
             return 1
-        for i in range(1 + current_amount / highest_denom_possible):
-            count += helper(current_amount - highest_denom_possible * i, highest_denom_possible / 2)
+
+        count = 0
+        #i goes from 0 to the max number of times the highest denomination
+            # can go into the current amount
+        for i in range(1 + int(current_amount // highest_denom_possible)):
+            # highest_denom_possible * i is the number of times the highest denom
+              # is used
+            new_amount_to_sum_to = current_amount - highest_denom_possible * i
+            next_highest_denom = highest_denom_possible / 2 #highest denom for new amount to sum
+            count += helper(new_amount_to_sum_to, next_highest_denom)
 
         return count
+
+    return helper(amount, highest_power_of_2_smaller_than_n(amount))
 ###################
 # Extra Questions #
 ###################
