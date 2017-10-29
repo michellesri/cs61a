@@ -114,8 +114,7 @@ def create_row(size):
     >>> create_row(5)
     ['-', '-', '-', '-', '-']
     """
-    "*** YOUR CODE HERE ***"
-    return _______
+    return ['-' for _ in range(size)]
 
 
 def create_board(rows, columns):
