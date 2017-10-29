@@ -123,8 +123,7 @@ def create_board(rows, columns):
     >>> create_board(3, 5)
     [['-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-']]
     """
-    "*** YOUR CODE HERE ***"
-    return _______
+    return [['-' for _ in range(columns)] for _ in range(rows)]
 
 
 def replace_elem(lst, index, elem):
