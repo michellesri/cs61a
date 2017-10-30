@@ -138,7 +138,9 @@ def replace_elem(lst, index, elem):
     False
     """
     assert index >= 0 and index < len(lst), 'Index is out of bounds'
+
     return lst[:index] + [elem] + lst[(index + 1):]
+
 
 
 def get_piece(board, row, column):
@@ -176,7 +178,24 @@ def put_piece(board, max_rows, column, player):
     >>> row
     -1
     """
-    "*** YOUR CODE HERE ***"
+    current_row = max_rows - 1
+    selection = get_piece(board, current_row, column)
+    while selection != '-' and current_row >= 0:
+        current_row -= 1
+        if current_row == -1:
+            return -1, board
+        selection = get_piece(board, current_row, column)
+
+    updated_row = replace_elem(board[current_row], column, player)
+
+    return current_row, board[:current_row] + [updated_row] + board[(current_row + 1):]
+
+
+
+
+
+
+
 
 
 def make_move(board, max_rows, max_cols, col, player):
