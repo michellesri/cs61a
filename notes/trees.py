@@ -23,11 +23,18 @@ t = tree(1,
             tree(6)]),
         tree(2)])
 
-simple_tree = tree(3, [tree(4), tree(5)])
+simple_tree = tree(3,
+    [tree(4), tree(5)])
 
 def tree_max(t):
     """Return the max of a tree (the largest number in a tree)."""
     return max([label(t)] + [branch for branch in branches(t)])
+
+def height(t):
+    """Return the height of a tree"""
+    if is_leaf(t):
+        return 0
+    return 1 + max([height(branch) for branch in branches(t)])
 
 def square_tree(t):
     """Return a tree with the square of every element in t"""
