@@ -191,13 +191,6 @@ def put_piece(board, max_rows, column, player):
     return current_row, board[:current_row] + [updated_row] + board[(current_row + 1):]
 
 
-
-
-
-
-
-
-
 def make_move(board, max_rows, max_cols, col, player):
     """Put player's piece in column COL of the board, if it is a valid move.
     Return a tuple of two values:
@@ -223,7 +216,11 @@ def make_move(board, max_rows, max_cols, col, player):
     >>> row
     -1
     """
-    "*** YOUR CODE HERE ***"
+    # the column is full or invalid column
+    if col > max_cols or col < 0 or put_piece(board, max_rows, col, player) == -1:
+        return -1, board
+
+    return put_piece(board, max_rows, col, player)
 
 def print_board(board, max_rows, max_cols):
     """Prints the board. Row 0 is at the top, and column 0 at the far left.
