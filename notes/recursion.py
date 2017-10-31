@@ -191,3 +191,22 @@ def count_k(n, k):
         else:
             total += count_k(n - i, k)
     return total
+
+Complete the definition for num_digits, which takes in a
+number n and returns the number of digits it has.
+
+def num_digits(n):
+    """Takes in an positive integer and returns the number of
+    digits.
+    >>> num_digits(0)
+    1
+    >>> num_digits(1)
+    1
+    >>> num_digits(7)
+    1
+    >>> num_digits(1093)
+    4
+    """
+    if n < 10:
+        return 1
+    return 1 + num_digits(n // 10)
