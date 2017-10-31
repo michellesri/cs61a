@@ -27,4 +27,30 @@ def has_sum(total, n, m):
     # if decrement goes evenly to 0 then we printed the exact total
     # otherwise, if it decremented into a negative, then we couldn't
         # print exactly the total
-    return has_sum(total - n, m) or has_sum(total - m, n)
+    return has_sum(total - n, n, m) or has_sum(total - m, m, n)
+
+# The next day, the printers break down even more! Each time they
+# are used, the first printer prints a random x copies 50 ≤ x ≤ 60,
+# and the second printer prints a random y copies 130 ≤ y ≤ 140. Peter
+# also relaxes his expectations: he’s satisfied as long as there’s
+# at least lower copies so there are enough for
+# everyone, but no more than upper copies to prevent waste.
+
+def sum_range(lower, upper):
+    """
+    >>> sum_range(45, 60) # Printer 1 prints within this range
+    True
+    >>> sum_range(40, 55) # Printer 1 can print a number 56-60
+    False
+    >>> sum_range(170, 201) # Printer 1 + 2 will print between 180 and 200 copies total
+    True
+    """
+
+    def copies(pmin, pmax):
+        if lower <= pmin and pmax >= upper:
+            return True
+        elif pmax > upper:
+            return False
+        return copies(pmin + 50, pmax + 60) or copies(pmin + 130, pmax + 140)
+
+    return copies(0, 0)
