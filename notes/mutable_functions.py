@@ -24,3 +24,20 @@ steven = make_withdraw_list(100)
 steven(25)
 
 # NOTE: john and steven represent bank accounts opened
+
+#interesting example of how nonlocal works.
+    #run with pythontutor if confused
+def f(x):
+    x = 3
+    def g(y):
+        def h(z):
+            nonlocal x
+            x = x + 1
+            return x + y + z
+        return h
+    return g
+
+a = f(1)
+b = a(2)
+
+total = b(3) + b(4)
