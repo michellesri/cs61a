@@ -55,9 +55,21 @@ def find_path(tree, x):
     if label(tree) == x:
         return [label(tree)]
 
-    # all of these should be none except for the correct path
-    paths = [find_path(branch, x) for branch in branches(t)]
-    for path in paths:
-        if path:
-            # return the label of the correct path along with the rest of it
-            return [label(path)] + path
+    if is_leaf(tree):
+        return None
+
+    for branch in branches(tree):
+        find_path_list = find_path(branch, x)
+        if find_path_list is not None:
+            return [label(tree)] + find_path_list
+
+
+    # if label(tree) == x:
+    #     return [label(tree)]
+    #
+    # # all of these should be none except for the correct path
+    # paths = [find_path(branch, x) for branch in branches(t)]
+    # for path in paths:
+    #     if path:
+    #         # return the label of the correct path along with the rest of it
+    #         return [label(tree)] + path
