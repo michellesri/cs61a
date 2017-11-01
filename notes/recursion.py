@@ -192,8 +192,8 @@ def count_k(n, k):
             total += count_k(n - i, k)
     return total
 
-Complete the definition for num_digits, which takes in a
-number n and returns the number of digits it has.
+# Complete the definition for num_digits, which takes in a
+# number n and returns the number of digits it has.
 
 def num_digits(n):
     """Takes in an positive integer and returns the number of
@@ -210,3 +210,26 @@ def num_digits(n):
     if n < 10:
         return 1
     return 1 + num_digits(n // 10)
+
+Write a function is_sorted that takes in an integer n and
+returns true if the digits of that number are increasing from right to left.
+
+def is_sorted(n):
+    """
+    >>> is_sorted(2)
+    True
+    >>> is_sorted(22222)
+    True
+    >>> is_sorted(9876543210)
+    True
+    >>> is_sorted(9087654321)
+    False
+    """
+    right_digit = n % 10
+    rest_digits = n // 10
+
+    if rest_digits == 0:
+        return True
+    elif right_digit > rest % 10:
+        return False
+    return is_sorted(rest_digits)
