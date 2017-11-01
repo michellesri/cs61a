@@ -44,10 +44,12 @@ def sum_range(lower, upper):
     False
     >>> sum_range(170, 201) # Printer 1 + 2 will print between 180 and 200 copies total
     True
+    >>> sum_range(135, 150)
+    False
     """
 
     def copies(pmin, pmax):
-        if lower <= pmin and pmax >= upper:
+        if lower <= pmin and pmax <= upper:
             return True
         elif pmax > upper:
             return False
