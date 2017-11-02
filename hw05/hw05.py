@@ -202,7 +202,6 @@ def div_interval(x, y):
     """Return the interval that contains the quotient of any value in x divided by
     any value in y. Division is implemented as the multiplication of x by the
     reciprocal of y."""
-    "*** YOUR CODE HERE ***"
     assert lower_bound(y) > 0 and upper_bound(y) > 0
     reciprocal_y = interval(1/upper_bound(y), 1/lower_bound(y))
     return mul_interval(x, reciprocal_y)
@@ -225,8 +224,8 @@ def check_par():
     >>> lower_bound(x) != lower_bound(y) or upper_bound(x) != upper_bound(y)
     True
     """
-    r1 = interval(1, 1) # Replace this line!
-    r2 = interval(1, 1) # Replace this line!
+    r1 = par1(interval(1, 2), interval(5, 4)) # Replace this line!
+    r2 = par2(interval(1, 2), interval(5, 4)) # Replace this line!
     return r1, r2
 
 def multiple_references_explanation():
