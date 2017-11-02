@@ -92,7 +92,12 @@ def replace_leaf(t, old, new):
     >>> laerad == yggdrasil # Make sure original tree is unmodified
     True
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        if label(t) == old:
+            return tree(new)
+        return t
+    new_branches = [replace_leaf(branch, old, new) for branch in branches(t)]
+    return tree(label(t), new_branches)
 
 def print_move(origin, destination):
     """Print instructions to move a disk."""
@@ -221,4 +226,3 @@ def polynomial(x, c):
     '18.0 to 23.0'
     """
     "*** YOUR CODE HERE ***"
-
