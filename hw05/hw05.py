@@ -224,8 +224,8 @@ def check_par():
     >>> lower_bound(x) != lower_bound(y) or upper_bound(x) != upper_bound(y)
     True
     """
-    r1 = par1(interval(1, 2), interval(5, 4)) # Replace this line!
-    r2 = par2(interval(1, 2), interval(5, 4)) # Replace this line!
+    r1 = interval(1, 1)
+    r2 = interval(1, 2)
     return r1, r2
 
 def multiple_references_explanation():
