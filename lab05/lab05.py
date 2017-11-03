@@ -7,11 +7,6 @@ def map(fn, seq):
     >>> map(lambda x: x*x, [1, 2, 3])
     [1, 4, 9]
     """
-    # mapped_list = []
-    # for x in seq:
-    #     mapped_list.append(fn(x))
-    # return mapped_list
-
     return [fn(ele) for ele in seq]
 
 def filter(pred, seq):
@@ -32,7 +27,11 @@ def reduce(combiner, seq):
     >>> reduce(lambda x, y: x * y, [4])
     4
     """
-    "*** YOUR CODE HERE ***"
+    total = seq[0]
+
+    for x in seq[1:]:
+        total = combiner(total, x)
+    return total
 
 # pyTunes
 def make_pytunes(username):
