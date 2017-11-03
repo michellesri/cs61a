@@ -18,7 +18,7 @@ def filter(pred, seq):
     >>> filter(lambda x: x % 2 == 0, [1, 2, 3, 4])
     [2, 4]
     """
-    "*** YOUR CODE HERE ***"
+    return [ele for ele in seq if pred(ele)]
 
 def reduce(combiner, seq):
     """Combines elements in seq using combiner.
