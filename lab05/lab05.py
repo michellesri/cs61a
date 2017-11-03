@@ -7,10 +7,12 @@ def map(fn, seq):
     >>> map(lambda x: x*x, [1, 2, 3])
     [1, 4, 9]
     """
-    mapped_list = []
-    for x in seq:
-        mapped_list.append(fn(x))
-    return mapped_list
+    # mapped_list = []
+    # for x in seq:
+    #     mapped_list.append(fn(x))
+    # return mapped_list
+
+    return [fn(ele) for ele in seq]
 
 def filter(pred, seq):
     """Keeps elements in seq only if they satisfy pred.
