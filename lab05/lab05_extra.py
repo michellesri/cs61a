@@ -50,7 +50,8 @@ def delete(t, target):
         gangnam style
         wedding dress
     """
-    "*** YOUR CODE HERE ***"
+    kept_branches = [delete(b, target) for b in branches(t) if label(b) != target]
+    return tree(label(t), kept_branches)
 
 # Shakespeare and Dictionaries
 def build_successors_table(tokens):
