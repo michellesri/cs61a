@@ -63,14 +63,12 @@ def make_restaurant(name, location, categories, price, reviews):
     """Return a restaurant data abstraction."""
     # You may change this starter implementation however you wish, including
     # adding more items to the dictionary below.
-    # BEGIN Question 1
-    "*** REPLACE THIS LINE ***"
-    # END Question 1
     return {
         'name': name,
         'location': location,
         'categories': categories,
         'price': price,
+        'reviews': reviews
     }
 
 def restaurant_name(restaurant):
@@ -93,21 +91,15 @@ def restaurant_price(restaurant):
 def restaurant_ratings(restaurant):
     """Return a list of ratings, which are numbers from 1 to 5, of the
     restaurant based on the reviews of the restaurant."""
-    # BEGIN Question 1
-    "*** REPLACE THIS LINE ***"
-    # END Question 1
+    return [review_rating(i) for i in restaurant['reviews']]
 
 
 ### === +++ RESTAURANT ABSTRACTION BARRIER +++ === ###
 
 def restaurant_num_ratings(restaurant):
     """Return the number of ratings for the restaurant."""
-    # BEGIN Question 2
-    "*** REPLACE THIS LINE ***"
-    # END Question 2
+    return len(restaurant_ratings(restaurant))
 
 def restaurant_mean_rating(restaurant):
     """Return the average rating for the restaurant."""
-    # BEGIN Question 2
-    "*** REPLACE THIS LINE ***"
-    # END Question 2
+    return sum(restaurant_ratings(restaurant)) / len(restaurant_ratings(restaurant))
