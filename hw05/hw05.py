@@ -229,7 +229,21 @@ def check_par():
     return r1, r2
 
 def multiple_references_explanation():
-    return """The multiple reference problem..."""
+    return """The multiple reference problem exists.  The true value
+    within a particular interval is fixed (though unknown).  Nested
+    combinations that refer to the same interval twice may assume two different
+    true values for the same interval, which is an error that results in
+    intervals that are larger than they should be.
+
+    Consider the case of i * i, where i is an interval from -1 to 1.  No value
+    within this interval, when squared, will give a negative result.  However,
+    our mul_interval function will allow us to choose 1 from the first
+    reference to i and -1 from the second, giving an erroneous lower bound of
+    -1.
+
+    Hence, a program like par2 is better than par1 because it never combines
+    the same interval more than once.
+    """
 
 def quadratic(x, a, b, c):
     """Return the interval that is the range of the quadratic defined by
@@ -240,7 +254,13 @@ def quadratic(x, a, b, c):
     >>> str_interval(quadratic(interval(1, 3), 2, -3, 1))
     '0 to 10'
     """
-    "*** YOUR CODE HERE ***"
+    extremum = -b / (2*a)
+    f = lambda x: a * x * x + b * x + c
+    l, u, e = map(f, (lower_bound(x), upper_bound(x), extremum))
+
+    if extremum >= lower_bound(x) and extremum <= upper_bound(x):
+        return interval(min(l, u, e), max(l, u, e))
+    return interval(min(l, u), max(l, u))
 
 def polynomial(x, c):
     """Return the interval that is the range of the polynomial defined by
