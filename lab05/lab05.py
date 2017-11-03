@@ -50,7 +50,15 @@ def make_pytunes(username):
         darude
           sandstorm
     """
-    "*** YOUR CODE HERE ***"
+    return tree(username,
+             [tree('pop',
+               [tree('justin bieber',
+                 [tree('single',
+                   [tree('what do you mean?')])]),
+                tree('2015 pop mashup')]),
+              tree('trance',
+                [tree('darude',
+                  [tree('sandstorm')])])])
 
 def num_songs(t):
     """Return the number of songs in the pyTunes tree, t.
