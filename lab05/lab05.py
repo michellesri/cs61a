@@ -70,7 +70,9 @@ def num_songs(t):
     >>> num_songs(pytunes_simple)
     1
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return 1
+    return sum([num_songs(branch) for branch in branches(t)])
 
 # Tree ADT
 # Tree definition
