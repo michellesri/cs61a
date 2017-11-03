@@ -84,7 +84,8 @@ def construct_sent(word, table):
     import random
     result = ' '
     while word not in ['.', '!', '?']:
-        "*** YOUR CODE HERE ***"
+        result += word + ' '
+        word = random.choice(table[word])
     return result + word
 
 def shakespeare_tokens(path='shakespeare.txt', url='http://composingprograms.com/shakespeare.txt'):
