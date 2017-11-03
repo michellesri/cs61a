@@ -23,7 +23,12 @@ def add_song(t, song, category):
           hurt
           ring of fire
     """
-    "*** YOUR CODE HERE ***"
+    if label(t) == category and not is_leaf(t):
+        return tree(label(t), branches(t) + [tree(song)])
+
+    all_branches = [add_song(branch, song, category) for branch in branches(t)]
+
+    return tree(label(t), all_branches)
 
 def delete(t, target):
     """Returns the tree that results from deleting TARGET from t. If TARGET is
