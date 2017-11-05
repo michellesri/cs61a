@@ -76,9 +76,8 @@ def k_means(restaurants, k, max_updates=100):
 
     while old_centroids != centroids and n < max_updates:
         old_centroids = centroids
-        # BEGIN Question 6
-        "*** REPLACE THIS LINE ***"
-        # END Question 6
+        same_centroids_list = group_by_centroid(restaurants, centroids)
+        centroids = [find_centroid(i) for i in same_centroids_list]
         n += 1
     return centroids
 
