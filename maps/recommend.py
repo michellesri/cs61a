@@ -103,10 +103,23 @@ def find_predictor(user, restaurants, feature_fn):
     xs = [feature_fn(r) for r in restaurants]
     ys = [reviews_by_user[restaurant_name(r)] for r in restaurants]
 
-    # BEGIN Question 7
-    "*** REPLACE THIS LINE ***"
-    b, a, r_squared = 0, 0, 0  # REPLACE THIS LINE WITH YOUR SOLUTION
-    # END Question 7
+    sxx_sub = [i-mean(xs) for i in xs]
+    sxx = 0
+    for i in range(len(sxx_sub)):
+        sxx += sxx_sub[i] * sxx_sub[i]
+
+    syy_sub = [j-mean(ys) for j in ys]
+    syy = 0
+    for j in range(len(syy_sub)):
+        syy += syy_sub[j] * syy_sub[j]
+    sxy = 0
+    for k in range(len(sxx_sub)):
+        sxy += sxx_sub[k] * syy_sub[k]
+
+    b = sxy/sxx
+    a = mean(ys) - b * mean(xs)
+    r_squared = sxy * sxy / (sxx * syy)
+
 
     def predictor(restaurant):
         return b * feature_fn(restaurant) + a
