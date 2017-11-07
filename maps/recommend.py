@@ -137,9 +137,20 @@ def best_predictor(user, restaurants, feature_fns):
     feature_fns -- A sequence of functions that each takes a restaurant
     """
     reviewed = user_reviewed_restaurants(user, restaurants)
-    # BEGIN Question 8
-    "*** REPLACE THIS LINE ***"
-    # END Question 8
+
+    predictor_for_feature_fns = [find_predictor(user, reviewed, fn) for fn in feature_fns]
+
+    highest_r_square = None
+    highest_r_square_predictor = None
+    for (predictor, r_squared) in predictor_for_feature_fns:
+        if highest_r_square is None:
+            highest_r_square = r_squared
+            highest_r_square_predictor = predictor
+
+        elif r_squared > highest_r_square:
+            highest_r_square = r_squared
+            highest_r_square_predictor = predictor
+    return highest_r_square_predictor
 
 
 def rate_all(user, restaurants, feature_fns):
@@ -153,9 +164,18 @@ def rate_all(user, restaurants, feature_fns):
     """
     predictor = best_predictor(user, ALL_RESTAURANTS, feature_fns)
     reviewed = user_reviewed_restaurants(user, restaurants)
-    # BEGIN Question 9
-    "*** REPLACE THIS LINE ***"
-    # END Question 9
+
+    user_ratings_dictionary = {}
+
+
+    for r in restaurants:
+        name = restaurant_name(r)
+        if r not in reviewed:
+            user_ratings_dictionary[name] = predictor(r)
+        else:
+            user_ratings_dictionary[name] = user_rating(user, name)
+    return user_ratings_dictionary
+
 
 
 def search(query, restaurants):
@@ -165,9 +185,8 @@ def search(query, restaurants):
     query -- A string
     restaurants -- A sequence of restaurants
     """
-    # BEGIN Question 10
-    "*** REPLACE THIS LINE ***"
-    # END Question 10
+
+    return [r for r in restaurants if query in restaurant_categories(r)]
 
 
 def feature_set():
