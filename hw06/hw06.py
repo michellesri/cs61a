@@ -212,8 +212,6 @@ def balanced(m):
     right_torque = length(right_side) * total_weight(end_right)
     return left_torque == right_torque and balanced(end_left) and balanced(end_right)
 
-
-
 def with_totals(m):
     """Return a mobile with total weights stored as the label of each mobile.
 
@@ -229,7 +227,12 @@ def with_totals(m):
     >>> [label(end(s)) for s in sides(v)]         # v should not change
     [None, None]
     """
-    "*** YOUR CODE HERE ***"
+
+    if is_weight(m):
+        return m
+
+    total_tree = [side(length(s), with_totals(end(s))) for s in sides(m)]
+    return tree(total_weight(m), total_tree)
 
 ############
 # Mutation #
