@@ -199,7 +199,20 @@ def balanced(m):
     >>> balanced(mobile(side(1, w), side(1, v)))
     False
     """
-    "*** YOUR CODE HERE ***"
+    if is_weight(m):
+        return True
+    #alternatively can do left_side, right_side = sides(m)
+    left_side = sides(m)[0]
+    right_side = sides(m)[1]
+
+    end_left = end(left_side)
+    end_right = end(right_side)
+
+    left_torque = length(left_side) * total_weight(end_left)
+    right_torque = length(right_side) * total_weight(end_right)
+    return left_torque == right_torque and balanced(end_left) and balanced(end_right)
+
+
 
 def with_totals(m):
     """Return a mobile with total weights stored as the label of each mobile.
