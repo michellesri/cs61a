@@ -16,6 +16,7 @@ def dictionary():
             elif message == 'setitem':
                 setitem(key, value)
         return dispatch
+
 def account(initial_balance):
     def deposit(amount):
         dispatch['balance'] += amount
