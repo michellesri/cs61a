@@ -258,7 +258,14 @@ def make_counter():
     >>> c('b') + c2('b')
     5
     """
-    "*** YOUR CODE HERE ***"
+    count_dictionary = {}
+    def counter(key):
+        if key in count_dictionary:
+            count_dictionary[key] += 1
+        else:
+            count_dictionary[key] = 1
+        return count_dictionary[key]
+    return counter
 
 def make_fib():
     """Returns a function that returns the next Fibonacci number
