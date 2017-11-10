@@ -286,7 +286,14 @@ def make_fib():
     >>> fib() + sum([fib2() for _ in range(5)])
     12
     """
-    "*** YOUR CODE HERE ***"
+    prev1 = 0
+    prev2 = 1
+    def fib():
+        nonlocal prev1, prev2
+        total = prev1
+        prev1, prev2 = prev2, prev1 + prev2
+        return total
+    return fib
 
 def make_withdraw(balance, password):
     """Return a password-protected withdraw function.
