@@ -85,6 +85,7 @@ class Insect(object):
 
     is_ant = False
     damage = 0
+    watersafe = False
 
     def __init__(self, armor, place=None):
         """Create an Insect with an ARMOR amount and a starting PLACE."""
@@ -120,6 +121,7 @@ class Bee(Insect):
 
     name = 'Bee'
     damage = 1
+    watersafe = True
 
     def sting(self, ant):
         """Attack an ANT, reducing its armor by 1."""
