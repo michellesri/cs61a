@@ -5,6 +5,8 @@ class Player(object):
         """Create a player object."""
         self.name = name
         self.place = place
+        self.backpack = []
+
 
     def look(self):
         self.place.look()
@@ -84,7 +86,12 @@ class Player(object):
         """
         if type(thing) != str:
             print('Thing should be a string.')
-        "*** YOUR CODE HERE ***"
+        elif thing not in self.place.things:
+            print(thing + ' is not here.')
+        else:
+            taken_item = self.place.take(thing)
+            self.backpack.append(taken_item)
+            print(self.name + ' takes the ' + taken_item.name)
 
     def check_backpack(self):
         """Print each item with its description and return a list of item names.
