@@ -239,6 +239,7 @@ class FireAnt(Ant):
 
     name = 'Fire'
     damage = 3
+    food_cost = 5
     # BEGIN Problem 4
     implemented = True   # Change to True to view in the GUI
     # END Problem 4
@@ -249,9 +250,13 @@ class FireAnt(Ant):
         the current place.
         """
         # BEGIN Problem 4
-        "*** YOUR CODE HERE ***"
-        # END Problem 4
+        fireant_place = self.place
 
+        super(FireAnt, self).reduce_armor(amount)
+        if self.armor <= 0:
+            bees = list(fireant_place.bees)
+            for bee in bees:
+                bee.reduce_armor(self.damage)
 
 class LongThrower(ThrowerAnt):
     """A ThrowerAnt that only throws leaves at Bees at least 5 places away."""
