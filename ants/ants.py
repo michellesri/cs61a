@@ -249,7 +249,6 @@ class FireAnt(Ant):
         has no armor remaining. If the FireAnt dies, damage each of the bees in
         the current place.
         """
-        # BEGIN Problem 4
         fireant_place = self.place
 
         super(FireAnt, self).reduce_armor(amount)
