@@ -23,9 +23,10 @@ class Place(object):
         self.ant = None       # An Ant
         self.entrance = None  # A Place
         # Phase 1: Add an entrance to the exit
-        # BEGIN Problem 2
-        "*** YOUR CODE HERE ***"
-        # END Problem 2
+
+        if exit:
+            exit.entrance = self
+
 
     def add_insect(self, insect):
         """Add an INSECT to this Place.
