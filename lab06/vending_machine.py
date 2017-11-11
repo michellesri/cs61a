@@ -16,4 +16,11 @@ def vending_machine(snacks):
     >>> vender()
     'chocolate'
     """
-    "*** YOUR CODE HERE ***"
+    snack_index = -1
+    def inner():
+        nonlocal snack_index
+        if snack_index >= len(snacks) - 1:
+            snack_index = -1
+        snack_index += 1
+        return snacks[snack_index]
+    return inner
