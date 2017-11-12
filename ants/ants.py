@@ -325,14 +325,14 @@ class NinjaAnt(Ant):
     damage = 1
     blocks_path = False
     food_cost = 5
-    # BEGIN Problem 8
+
     implemented = True   # Change to True to view in the GUI
-    # END Problem 8
 
     def action(self, colony):
-        # BEGIN Problem 8
-        "*** YOUR CODE HERE ***"
-        # END Problem 8
+        bees = list(self.place.bees)
+        for bee in bees:
+            bee.reduce_armor(self.damage)
+
 
 
 # BEGIN Problem 9
