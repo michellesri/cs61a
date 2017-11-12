@@ -187,7 +187,7 @@ class HarvesterAnt(Ant):
 
 
 class ThrowerAnt(Ant):
-    """ThrowerAnt throws a leaf each turn at the nearest Bee in its range."""
+    """ThrowerAnt throws a leaf each turn at the nearest Bee in its nearest_bee."""
 
     name = 'Thrower'
     implemented = True
@@ -201,9 +201,30 @@ class ThrowerAnt(Ant):
 
         This method returns None if there is no such Bee (or none in range).
         """
-        # BEGIN Problem 5
-        return random_or_none(self.place.bees)
-        # END Problem 5
+        current_place = self.place
+
+        # while current place exists and there are no bees that are not in the hive
+        # while current_place is not None and \
+        # len([bee for bee in current_place.bees if bee not in hive]) <= 0:
+        #     current_place = current_place.entrance
+        while True:
+            if current_place is None:
+                break
+            bee_found = False
+            for bee in current_place.bees:
+                if bee not in hive.bees:
+                    bee_found = True
+            if bee_found:
+                break
+            current_place = current_place.entrance
+
+            # find a place that has the bee that i want or None
+        if current_place is None:
+            return None
+            # there's at least one bee that's not in the hive
+
+        bees_not_in_hive = [bee for bee in current_place.bees if bee not in hive.bees]
+        return random_or_none(bees_not_in_hive)
 
     def throw_at(self, target):
         """Throw a leaf at the TARGET Bee, reducing its armor."""
