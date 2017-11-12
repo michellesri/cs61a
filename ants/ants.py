@@ -282,15 +282,29 @@ class LongThrower(ThrowerAnt):
     """A ThrowerAnt that only throws leaves at Bees at least 5 places away."""
 
     name = 'Long'
-    # BEGIN Problem 6
-    implemented = False   # Change to True to view in the GUI
-    # END Problem 6
+    implemented = True   # Change to True to view in the GUI
+    min_range = 5
+    food_cost = 2
+
+    # def nearest_bee(self, hive):
+    #     min_entrance_transitions = 5
+    #     current_range = self.place
+    #     bees_not_in_hive = [bee for bee in current_range.bees if bee not in hive.bees]
+    #     while min_entrance_transitions > 0 and current_range not None:
+    #         current_range = current_range.entrance
+    #         min_entrance_transitions -= 1
+    #     while current_range not None and len(bees_not_in_hive) <= 0
+    #         current_range = current_range.entrance
+    #
+    #     bees_not_in_hive = [bee for bee in current_place.bees if bee not in hive.bees]
+
 
 
 class ShortThrower(ThrowerAnt):
     """A ThrowerAnt that only throws leaves at Bees at most 3 places away."""
 
     name = 'Short'
+    food_cost = 2
     # BEGIN Problem 6
     implemented = False   # Change to True to view in the GUI
     # END Problem 6
