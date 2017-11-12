@@ -336,7 +336,11 @@ class NinjaAnt(Ant):
 
 
 # BEGIN Problem 9
-# The ScubaThrower class
+class ScubaThrower(Ant):
+    name = 'Scuba'
+    implemented = True
+    food_cost = 6
+    armor = 1
 # END Problem 9
 
 
