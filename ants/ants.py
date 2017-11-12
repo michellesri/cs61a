@@ -194,37 +194,30 @@ class ThrowerAnt(Ant):
     damage = 1
     food_cost = 3
     armor = 1
+    min_range = 0
+    max_range = 10
+
 
     def nearest_bee(self, hive):
-        """Return the nearest Bee in a Place that is not the HIVE, connected to
+        """Return the nearest Bee in a Place that is not the Hive, connected to
         the ThrowerAnt's Place by following entrances.
-
         This method returns None if there is no such Bee (or none in range).
         """
-        current_place = self.place
-
-        # while current place exists and there are no bees that are not in the hive
-        # while current_place is not None and \
-        # len([bee for bee in current_place.bees if bee not in hive]) <= 0:
-        #     current_place = current_place.entrance
+        place = self.place
+        bees = place.bees
+        transition = 0
+        # while len(bees) <= 0 and place.entrance != hive and self.min_range <= transition <= self.max_range:
         while True:
-            if current_place is None:
-                break
-            bee_found = False
-            for bee in current_place.bees:
-                if bee not in hive.bees:
-                    bee_found = True
-            if bee_found:
-                break
-            current_place = current_place.entrance
+            if len(bees) > 0 and self.min_range <= transition <= self.max_range:
+                return random_or_none(bees)
+            if place.entrance == hive:
+                return None
+            place = place.entrance
+            bees = place.bees
+            transition += 1
 
-            # find a place that has the bee that i want or None
-        if current_place is None:
+        if place.bees:
             return None
-            # there's at least one bee that's not in the hive
-
-        bees_not_in_hive = [bee for bee in current_place.bees if bee not in hive.bees]
-        return random_or_none(bees_not_in_hive)
 
     def throw_at(self, target):
         """Throw a leaf at the TARGET Bee, reducing its armor."""
@@ -305,8 +298,9 @@ class ShortThrower(ThrowerAnt):
 
     name = 'Short'
     food_cost = 2
+    max_range = 3
     # BEGIN Problem 6
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 6
 
 
