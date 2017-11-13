@@ -333,15 +333,11 @@ class NinjaAnt(Ant):
         for bee in bees:
             bee.reduce_armor(self.damage)
 
-
-
-# BEGIN Problem 9
 class ScubaThrower(ThrowerAnt):
     name = 'Scuba'
     implemented = True
     food_cost = 6
     watersafe = True
-# END Problem 9
 
 
 class HungryAnt(Ant):
@@ -350,12 +346,14 @@ class HungryAnt(Ant):
     """
     name = 'Hungry'
     # BEGIN Problem 10
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
+    time_to_digest = 3
+    food_cost = 4
     # END Problem 10
 
     def __init__(self):
         # BEGIN Problem 10
-        "*** YOUR CODE HERE ***"
+        self.digesting = 0
         # END Problem 10
 
     def eat_bee(self, bee):
