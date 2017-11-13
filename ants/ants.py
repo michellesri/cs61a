@@ -158,14 +158,19 @@ class Ant(Insect):
     implemented = False  # Only implemented Ant classes should be instantiated
     food_cost = 0
     blocks_path = True
+    container = False
 
     def __init__(self, armor=1):
         """Create an Ant with an ARMOR quantity."""
         Insect.__init__(self, armor)
 
     def can_contain(self, other):
-        # BEGIN Problem 11
-        "*** YOUR CODE HERE ***"
+        """ Return true if and only if:
+        1) This ant is a container.
+        2) This ant does not already contain another ant.
+        3) The other ant is not a container.
+        """
+        return self.container and self.ant is None and not other.container
         # END Problem 11
 
 
@@ -378,7 +383,10 @@ class BodyguardAnt(Ant):
     """BodyguardAnt provides protection to other Ants."""
     name = 'Bodyguard'
     # BEGIN Problem 11
-    implemented = False   # Change to True to view in the GUI
+    food_cost = 4
+    armor = 2
+    implemented = True   # Change to True to view in the GUI
+    container = True
     # END Problem 11
 
     def __init__(self):
@@ -387,12 +395,12 @@ class BodyguardAnt(Ant):
 
     def contain_ant(self, ant):
         # BEGIN Problem 11
-        "*** YOUR CODE HERE ***"
+        self.ant = ant
         # END Problem 11
 
     def action(self, colony):
         # BEGIN Problem 11
-        "*** YOUR CODE HERE ***"
+        self.ant.action(colony)
         # END Problem 11
 
 class TankAnt(BodyguardAnt):
