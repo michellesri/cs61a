@@ -354,16 +354,23 @@ class HungryAnt(Ant):
     def __init__(self):
         # BEGIN Problem 10
         self.digesting = 0
+        self.armor = 1
         # END Problem 10
 
     def eat_bee(self, bee):
         # BEGIN Problem 10
-        "*** YOUR CODE HERE ***"
-        # END Problem 10
+        bee.reduce_armor(bee.armor)
+        self.digesting = self.time_to_digest
+        # END Prolem 10
 
     def action(self, colony):
         # BEGIN Problem 10
-        "*** YOUR CODE HERE ***"
+        if self.digesting > 0:
+            self.digesting -= 1
+        else:
+            random_bee = random_or_none(self.place.bees)
+            if random_bee is not None:
+                self.eat_bee(random_bee)
         # END Problem 10
 
 
