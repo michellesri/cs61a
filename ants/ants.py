@@ -171,7 +171,7 @@ class Ant(Insect):
     def __init__(self, armor=1):
         """Create an Ant with an ARMOR quantity."""
         Insect.__init__(self, armor)
-        self.containing_ant = False
+        self.already_contains_ant = False
 
     def can_contain(self, other):
         """ Return true if and only if:
@@ -179,7 +179,7 @@ class Ant(Insect):
         2) This ant does not already contain another ant.
         3) The other ant is not a container.
         """
-        return self.container and not self.containing_ant and not other.container
+        return self.container and not self.already_contains_ant and not other.container
         # END Problem 11
 
 
@@ -221,7 +221,6 @@ class ThrowerAnt(Ant):
         place = self.place
         bees = place.bees
         transition = 0
-        # while len(bees) <= 0 and place.entrance != hive and self.min_range <= transition <= self.max_range:
         while True:
             if len(bees) > 0 and self.min_range <= transition <= self.max_range:
                 return random_or_none(bees)
@@ -281,6 +280,16 @@ class FireAnt(Ant):
         fireant_place = self.place
 
         super(FireAnt, self).reduce_armor(amount)
+
+        # its the new way of calling super, you are basically saying find me the
+        # super class of FireAnt, and then call that class's reduce_armor
+
+        # what does the self refer to, the current fireant object
+        # in order to find the super class of a FireAnt class, you need to have a FireAnt object
+        # which is what the self part does.
+
+        # if it doesn't find the method it's looking for in the immiedate class before Ant
+        # will it go look for it in the class
         if self.armor <= 0:
             bees = list(fireant_place.bees)
             for bee in bees:
@@ -404,7 +413,7 @@ class BodyguardAnt(Ant):
     def contain_ant(self, ant):
         # BEGIN Problem 11
         self.ant = ant
-        self.containing_ant = True
+        self.already_contains_ant = True
         # END Problem 11
 
     def action(self, colony):
@@ -419,11 +428,18 @@ class TankAnt(BodyguardAnt):
     damage = 1
     # BEGIN Problem 12
     implemented = False   # Change to True to view in the GUI
+    food_cost = 6
     # END Problem 12
 
     def action(self, colony):
         # BEGIN Problem 12
-        "*** YOUR CODE HERE ***"
+        super(TankAnt, self).action(colony)
+
+        bees_in_place = list(self.place.bees)
+        for bee in bees_in_place:
+            bee.reduce_armor(self.damage)
+
+
         # END Problem 12
 
 # BEGIN Problem 13
