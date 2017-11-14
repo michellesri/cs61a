@@ -43,7 +43,15 @@ class Place(object):
             else:
                 # Phase 6: Special handling for BodyguardAnt
                 # BEGIN Problem 11
-                assert self.ant is None, 'Two ants in {0}'.format(self)
+                if insect.can_contain(self.ant): # if insect is bodyguard and existing ant is not
+                    insect.contain_ant(self.ant)
+                    self.ant = insect
+                elif self.ant.can_contain(insect): # if existing ant is bodyguard and new ant is not
+                     #if there is an ant
+                    self.ant.contain_ant(insect) # current ant contains new ant
+
+                else:
+                    assert self.ant is None, 'Two ants in {0}'.format(self)
                 # END Problem 11
         else:
             self.bees.append(insect)
@@ -163,6 +171,7 @@ class Ant(Insect):
     def __init__(self, armor=1):
         """Create an Ant with an ARMOR quantity."""
         Insect.__init__(self, armor)
+        self.containing_ant = False
 
     def can_contain(self, other):
         """ Return true if and only if:
@@ -170,7 +179,7 @@ class Ant(Insect):
         2) This ant does not already contain another ant.
         3) The other ant is not a container.
         """
-        return self.container and self.ant is None and not other.container
+        return self.container and not self.containing_ant and not other.container
         # END Problem 11
 
 
@@ -318,7 +327,7 @@ class WallAnt(Ant):
 
     def __init__(self, armor=1):
         """Create an Ant with an ARMOR quantity."""
-        Insect.__init__(self, 4)
+        Ant.__init__(self, 4)
 
 # END Problem 7
 
@@ -358,8 +367,8 @@ class HungryAnt(Ant):
 
     def __init__(self):
         # BEGIN Problem 10
+        Ant.__init__(self)
         self.digesting = 0
-        self.armor = 1
         # END Problem 10
 
     def eat_bee(self, bee):
@@ -384,7 +393,6 @@ class BodyguardAnt(Ant):
     name = 'Bodyguard'
     # BEGIN Problem 11
     food_cost = 4
-    armor = 2
     implemented = True   # Change to True to view in the GUI
     container = True
     # END Problem 11
@@ -396,11 +404,13 @@ class BodyguardAnt(Ant):
     def contain_ant(self, ant):
         # BEGIN Problem 11
         self.ant = ant
+        self.containing_ant = True
         # END Problem 11
 
     def action(self, colony):
         # BEGIN Problem 11
-        self.ant.action(colony)
+        if self.ant is not None:
+            self.ant.action(colony)
         # END Problem 11
 
 class TankAnt(BodyguardAnt):
