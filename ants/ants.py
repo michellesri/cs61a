@@ -438,18 +438,17 @@ class TankAnt(BodyguardAnt):
         bees_in_place = list(self.place.bees)
         for bee in bees_in_place:
             bee.reduce_armor(self.damage)
-
-
         # END Problem 12
 
 # BEGIN Problem 13
-class QueenAnt(Ant):  # You should change this line
+class QueenAnt(ScubaThrower):
 # END Problem 13
     """The Queen of the colony. The game is over if a bee enters her place."""
 
     name = 'Queen'
     # BEGIN Problem 13
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
+    food_cost = 7
     # END Problem 13
 
     def __init__(self):
