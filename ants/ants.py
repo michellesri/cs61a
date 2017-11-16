@@ -22,7 +22,6 @@ class Place(object):
         self.bees = []        # A list of Bees
         self.ant = None       # An Ant
         self.entrance = None  # A Place
-        # Phase 1: Add an entrance to the exit
 
         if exit:
             exit.entrance = self
@@ -69,13 +68,21 @@ class Place(object):
         """
         if insect.is_ant:
             # Phase 6: Special Handling for BodyguardAnt and QueenAnt
-            if self.ant is insect:
+            if self.ant is insect: # if the place's ant is the insect
                 if hasattr(self.ant, 'container') and self.ant.container:
                     self.ant = self.ant.ant
+                elif isinstance(self.ant, QueenAnt) and not self.ant.imposter:
+                    return
                 else:
                     self.ant = None
             else:
+                # if the ant in place is a container and the insect it contains is the
+                    # insect we're trying to remove
                 if hasattr(self.ant, 'container') and self.ant.container and self.ant.ant is insect:
+                    # if the insect we're trying to remove is the True Queen do nothing.
+                    # else remove inner ant
+                    if isinstance(self.ant.ant, QueenAnt) and not self.ant.ant.imposter:
+                        return
                     self.ant.ant = None
                 else:
                     assert False, '{0} is not in {1}'.format(insect, self)
@@ -171,7 +178,7 @@ class Ant(Insect):
     def __init__(self, armor=1):
         """Create an Ant with an ARMOR quantity."""
         Insect.__init__(self, armor)
-        self.already_contains_ant = False
+        self.ant = None
 
     def can_contain(self, other):
         """ Return true if and only if:
@@ -179,7 +186,7 @@ class Ant(Insect):
         2) This ant does not already contain another ant.
         3) The other ant is not a container.
         """
-        return self.container and not self.already_contains_ant and not other.container
+        return self.container and not self.ant and not other.container
         # END Problem 11
 
 
@@ -408,12 +415,10 @@ class BodyguardAnt(Ant):
 
     def __init__(self):
         Ant.__init__(self, 2)
-        self.ant = None  # The Ant hidden in this bodyguard
 
     def contain_ant(self, ant):
         # BEGIN Problem 11
         self.ant = ant
-        self.already_contains_ant = True
         # END Problem 11
 
     def action(self, colony):
@@ -433,6 +438,7 @@ class TankAnt(BodyguardAnt):
 
     def action(self, colony):
         # BEGIN Problem 12
+        # get superclass of tankant -> gets all bodyguardant methods
         super(TankAnt, self).action(colony)
 
         bees_in_place = list(self.place.bees)
@@ -440,9 +446,8 @@ class TankAnt(BodyguardAnt):
             bee.reduce_armor(self.damage)
         # END Problem 12
 
-# BEGIN Problem 13
+num_queen_ants = 0
 class QueenAnt(ScubaThrower):
-# END Problem 13
     """The Queen of the colony. The game is over if a bee enters her place."""
 
     name = 'Queen'
@@ -450,20 +455,38 @@ class QueenAnt(ScubaThrower):
     implemented = True   # Change to True to view in the GUI
     food_cost = 7
     # END Problem 13
-
     def __init__(self):
+        ScubaThrower.__init__(self)
+        global num_queen_ants
+        self.imposter = num_queen_ants >= 1
         # BEGIN Problem 13
-        "*** YOUR CODE HERE ***"
+        self.doubled_ants = []
+        num_queen_ants += 1
         # END Problem 13
 
     def action(self, colony):
+
         """A queen ant throws a leaf, but also doubles the damage of ants
         in her tunnel.
 
         Impostor queens do only one thing: reduce their own armor to 0.
         """
         # BEGIN Problem 13
-        "*** YOUR CODE HERE ***"
+
+        if self.imposter:
+            self.reduce_armor(self.armor)
+        else:
+            super(QueenAnt, self).action(colony)
+            current_place = self.place.exit
+            while current_place: #place is at end of tunnel
+                ant = current_place.ant
+                if ant and ant.ant:
+                    ant = ant.ant
+                if ant not in self.doubled_ants and ant:
+                    ant.damage *= 2
+                    self.doubled_ants.append(ant)
+                current_place = current_place.exit
+
         # END Problem 13
 
     def reduce_armor(self, amount):
@@ -471,7 +494,10 @@ class QueenAnt(ScubaThrower):
         remaining, signal the end of the game.
         """
         # BEGIN Problem 13
-        "*** YOUR CODE HERE ***"
+        super(QueenAnt, self).reduce_armor(amount)
+        if self.armor <= 0 and not self.imposter:
+            bees_win()
+
         # END Problem 13
 
 class AntRemover(Ant):
