@@ -8,8 +8,10 @@ def divide_all(n, ds):
     >>> divide_all(1024, [2, 4, 8])
     16.0
     """
-
-    return reduce(truediv, ds, n)
+    try:
+        return reduce(truediv, ds, n)
+    except ZeroDivisionError:
+        return float('inf')
 
 def reduce(f, s, initial):
     """combine elements of s using f starting at initial_balance
