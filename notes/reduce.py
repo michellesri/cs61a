@@ -1,4 +1,15 @@
-from operator import add, mul
+from operator import add, mul, truediv
+
+def divide_all(n, ds):
+    """
+    uses division function (true_div)
+    all of the denoms (ds),
+    starting with numerator (n)
+    >>> divide_all(1024, [2, 4, 8])
+    16.0
+    """
+
+    return reduce(truediv, ds, n)
 
 def reduce(f, s, initial):
     """combine elements of s using f starting at initial_balance
