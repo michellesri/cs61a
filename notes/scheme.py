@@ -30,3 +30,11 @@ def read_tail(src):
     >>> read_tail(Buffer(tokenize_lines(['2 (3 4))'])))
     Pair(2, Pair(Pair(3, Pair(4, nil)), nil))
     """
+    if src.current() is None:
+        raise SyntaxError('unexpected end of file')
+    if src.current() == ')':
+        src.pop()
+        return nil
+    first = scheme_read(src)
+    rest = read_tail(src)
+    return Pair(first, rest)
