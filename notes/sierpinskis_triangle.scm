@@ -13,5 +13,4 @@
 (define (sier d j)
   ; Draw three legs of Sierpinski's triangle to depth d.
   (tri (lambda ()
-    (if ((= k 1)(fd d) (leg d k)))))
-)
+    (if (= k 1)(fd d) (leg d k)))))
