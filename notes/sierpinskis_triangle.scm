@@ -14,3 +14,12 @@
   ; Draw three legs of Sierpinski's triangle to depth d.
   (tri (lambda ()
     (if (= k 1)(fd d) (leg d k)))))
+
+(define (leg d k)
+  ; Draw one leg of Sierpinski's triangle to depth d.
+  (sier (/ d 2)(-k 1))
+  (penup)
+  (fd d)
+  (pendown))
+
+(sier 400 6)
