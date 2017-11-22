@@ -9,3 +9,6 @@ def scheme_read(src):
 
 
 def read_tail(src):
+    """Return the remainder of a list in src, starting
+    before an element or ).
+    """
