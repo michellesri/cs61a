@@ -6,6 +6,16 @@ def scheme_read(src):
     >>> print(scheme_read(src))
     (+ 1 (+ 23 4))
     """
+    if src.current() is None:
+        raise EOFError
+    if val == 'nil':
+        return nil
+    elif val not in DELIMITERS: # ( ) ' .
+        return val
+    elif val == '(':
+        return read_tail(src)
+    else:
+        raise SyntaxError('unexpected token: {0}'.format(val))
 
 
 def read_tail(src):
