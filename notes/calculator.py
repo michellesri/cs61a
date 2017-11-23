@@ -1,3 +1,7 @@
+from ucb import trace, main, interact
+from operator import add, sub, mul, truediv
+from scheme_reader import Pair, nil, scheme_read, buffer_input
+
 def calc_eval(exp):
     """Evaluate a Calculator expression.
 
