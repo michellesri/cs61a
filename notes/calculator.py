@@ -39,5 +39,18 @@ def calc_apply(operator, args):
     elif operator == '-':
         if len(args) == 0:
             raise TypeError(operator + ' requires at least 1 argument')
-    elif len(args) == 1:
-        return -args.first
+        elif len(args) == 1:
+            return -args.first
+        else:
+            return reduce(sub, args.second, args.first)
+    elif operator == '*':
+        return reduce(mul, args, 1)
+    elif operator == '/':
+        if len(args) == 0:
+            raise TypeError(operator + ' requires at least 1 argument')
+        elif len(args) == 1:
+            return 1/args.first
+        else:
+            return reduce(truediv, args.second, args.first)
+    else:
+        raise TypeError(operator + ' is an unknown operator')
