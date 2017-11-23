@@ -32,3 +32,12 @@ def calc_apply(operator, args):
     >>> calc_apply('/', as_scheme_list(10))
     0.1
     """
+    if not isinstance(operator, str):
+        raise TypeError(str(operator) + ' is not a symbol')
+    if operator == '+':
+        return reduce(add, args, 0)
+    elif operator == '-':
+        if len(args) == 0:
+            raise TypeError(operator + ' requires at least 1 argument')
+    elif len(args) == 1:
+        return -args.first
