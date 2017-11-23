@@ -13,3 +13,7 @@ def calc_eval(exp):
         return simplify(calc_apply(exp.first, arguments))
     else:
         raise TypeError(str(exp) + ' is not a number or call expression')
+
+def calc_apply(operator, args):
+    """Apply the named operator to a list of args.
+    
