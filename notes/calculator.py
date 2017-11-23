@@ -23,5 +23,12 @@ def calc_apply(operator, args):
     4
     >>> calc_apply('-', as_scheme_list(10))
     -10
-    >>>calc_apply('*', nil)
+    >>> calc_apply('*', nil)
     1
+    >>> calc_apply('*', as_scheme_list(1, 2, 3, 4, 5))
+    120
+    >>> calc_apply('/', as_scheme_list(40, 5))
+    8.0
+    >>> calc_apply('/', as_scheme_list(10))
+    0.1
+    """
