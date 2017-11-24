@@ -68,3 +68,5 @@ def read_eval_print_loop():
             while src.more_on_line:
                 expression = scheme_read(src)
                 print(calc_eval(expression))
+        except (SyntaxError, TypeError, ValueError, ZeroDivisionError) as err:
+            print(type(err).__name__ + ':', err)
