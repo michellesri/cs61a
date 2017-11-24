@@ -61,5 +61,9 @@ def calc_apply(operator, args):
 
 @main
 def read_eval_print_loop():
-    """Runa  read-eval-print loop for Calculator."""
-    
+    """Run a read-eval-print loop for Calculator."""
+    while True:
+        try:
+            src = buffer_input()
+            while src.more_on_line:
+                expression = scheme_read(src)
