@@ -58,3 +58,6 @@ def calc_apply(operator, args):
             return reduce(truediv, args.second, args.first)
     else:
         raise TypeError(operator + ' is an unknown operator')
+
+@main
+def read_eval_print_loop():
