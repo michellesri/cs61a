@@ -67,3 +67,4 @@ def read_eval_print_loop():
             src = buffer_input()
             while src.more_on_line:
                 expression = scheme_read(src)
+                print(calc_eval(expression))
