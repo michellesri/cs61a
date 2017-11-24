@@ -70,3 +70,6 @@ def read_eval_print_loop():
                 print(calc_eval(expression))
         except (SyntaxError, TypeError, ValueError, ZeroDivisionError) as err:
             print(type(err).__name__ + ':', err)
+        except (KeyboardInterrupt, EOFError): # <Control>-D, etc.
+            print('Calculation completed.')
+            return
