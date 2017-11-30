@@ -40,7 +40,84 @@ def extend_link(s, t):
     >>> s + s
     Link(3, Link(4, Link(5, Link(3, Link(4, Link(5))))))
     """
-        if s is Link.empty:
-            return t
+    if s is Link.empty:
+        return t
+    else:
+        return Link(s.first, extend_link(s.rest, t))
+
+def map_link(f, s):
+    """
+    applies a function f to each element of a linked list s
+    and constructs a linked list containing the results.
+    >>> map_link(square, s)
+    Link(9, Link(16, Link(25)))
+
+    """
+    if s is Link.empty:
+        return s
+    return Link(f(s.first), map_link(f, s.rest))
+
+def filter_link(f, s):
+    """
+    returns a linked list containing all elements of a linked list s
+    for which f returns a true value
+    >>> odd = lambda x: x % 2 == 1
+    >>> map_link(square, filter_link(odd, s))
+    Link(9, Link(25))
+    >>> [square(x) for x in [3, 4, 5] if odd(x)]
+    [9, 25]
+    """
+    if s is Link.empty:
+        return s
+    else:
+        filtered = filter_link(f, s.rest)
+        if f(s.first):
+            return Link(s.first, filtered)
         else:
-            return Link(s.first, extend_link(s.rest, t))
+            return filtered
+
+def join_link(s, separator):
+    """
+    function recursively constructs a string that contains the elements
+    of a linked list seperated by some separator string. The result is
+    much more compact than the output of link_expression.
+    >>> join_link(s, ", ")
+    '3, 4, 5'
+    """
+    if s is Link.empty:
+        return ""
+    elif s.rest is Link.empty:
+        return str(s.first)
+    else:
+        return str(s.first) + separator + join_link(s.rest, separator)
+
+def partitions(n, m):
+    """Return a linked list of partitions of n using parts of up to m.
+    Each partition is represented as a linked list.
+    """
+    if n == 0:
+        return Link(Link.empty) # A list containing the empty partition
+    elif n < 0 or m == 0:
+        return Link.empty
+    else:
+        using_m = partitions(n-m, m)
+        with_m = map_link(lambda s: Link(m, s), using_m)
+        without_m = partitions(n, m-1)
+        return with_m + without_m
+
+def print_partitions(n, m):
+    """
+    >>> print_partitions(6, 4)
+    4 + 2
+    4 + 1 + 1
+    3 + 3
+    3 + 2 + 1
+    3 + 1 + 1 + 1
+    2 + 2 + 2
+    2 + 2 + 1 + 1
+    2 + 1 + 1 + 1 + 1
+    1 + 1 + 1 + 1 + 1 + 1
+    """
+    lists = partitions(n, m)
+    strings = map_link(lambda s: join_link(s, " + "), lists)
+    print(join_link(strings, "\n"))
