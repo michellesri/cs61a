@@ -76,12 +76,16 @@ class Fib():
     def __init__(self, value=0):
         self.value = value
 
-    def next(self, prev=0):
-        if prev == 0:
-            self.value = 1
+    def next(self):
+
+        next_fib = Fib()
+        if self.value == 0:
+            next_fib.value = 1
         else:
-            prev = self.value
-        self.value += prev
+            next_fib.value = self.value + self.prev
+        next_fib.prev = self.value
+
+        return next_fib
 
     def __repr__(self):
         return str(self.value)
