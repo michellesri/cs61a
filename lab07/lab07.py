@@ -23,8 +23,11 @@ def link_to_list(link):
     >>> link_to_list(Link.empty)
     []
     """
-    "*** YOUR CODE HERE ***"
-
+    lst = []
+    while link is not Link.empty:
+        lst.append(link.first)
+        link = link.rest
+    return lst
 # Q4
 def remove_all(link , value):
     """Remove all the nodes containing value. Assume there exists some
