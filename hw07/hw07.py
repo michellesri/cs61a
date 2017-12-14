@@ -124,7 +124,45 @@ class VendingMachine:
     >>> w.vend()
     'Here is your soda.'
     """
-    "*** YOUR CODE HERE ***"
+    def __init__(self, product, value=0):
+        self.value = value
+        self.product = product
+        self.out_of_stock_str = 'Machine is out of stock.'
+        self.stock = 0
+        self.balance = 0
+
+
+    def vend(self):
+        if self.stock <= 0:
+            self.balance = 0
+            return self.out_of_stock_str
+        if self.value > self.balance:
+            money_needed = self.value - self.balance
+            return 'You must deposit $' + str(money_needed) + ' more.'
+
+        # Perform the vend
+        hasChange = self.balance > self.value
+        self.balance -= self.value
+        self.stock -= 1
+
+        if hasChange:
+            change = self.balance
+            self.balance = 0
+            return 'Here is your ' + self.product + ' and $' + str(change) + ' change.'
+        return 'Here is your ' + self.product + '.'
+
+    def deposit(self, amount):
+        if self.stock <= 0:
+            return self.out_of_stock_str + ' ' + 'Here is your $' + str(amount) + '.'
+        self.balance += amount
+        return 'Current balance: $' + str(self.balance)
+
+    def restock(self, stock_amount):
+        self.stock += stock_amount
+        return 'Current ' + self.product + ' stock: ' + str(self.stock)
+
+
+
 
 class MissManners:
     """A container class that only forwards messages that say please.
