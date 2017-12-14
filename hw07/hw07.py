@@ -141,11 +141,11 @@ class VendingMachine:
             return 'You must deposit $' + str(money_needed) + ' more.'
 
         # Perform the vend
-        hasChange = self.balance > self.value
+        has_change = self.balance > self.value
         self.balance -= self.value
         self.stock -= 1
 
-        if hasChange:
+        if has_change:
             change = self.balance
             self.balance = 0
             return 'Here is your ' + self.product + ' and $' + str(change) + ' change.'
@@ -202,4 +202,8 @@ class MissManners:
         magic_word = 'please '
         if not message.startswith(magic_word):
             return 'You must learn to say please first.'
-        "*** YOUR CODE HERE ***"
+        # remove 'please'
+        obj_fn = message[len(magic_word):]
+        if not hasattr(self.obj, obj_fn):
+            return 'Thanks for asking, but I know not how to ' + obj_fn + '.'
+        return getattr(self.obj, obj_fn)(*args)
