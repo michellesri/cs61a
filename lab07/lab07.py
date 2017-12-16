@@ -45,8 +45,12 @@ def remove_all(link , value):
     """
     if link is Link.empty or link.rest is Link.empty:
         return
-    if link.first == value:
+    if link.rest.first == value:
         link.rest = link.rest.rest
+        remove_all(link, value)
+    else:
+        remove_all(link.rest, value)
+
 
 # Linked List Class
 class Link:
