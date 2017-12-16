@@ -11,7 +11,13 @@ def deep_len(lnk):
     >>> deep_len(levels)
     5
     """
-    "*** YOUR CODE HERE ***"
+    if lnk is Link.empty:
+        return 0
+    elif not isinstance(lnk, Link):
+        return 1
+    else:
+        return deep_len(lnk.first) + deep_len(lnk.rest)
+    
 
 def make_to_string(front, mid, back, empty_repr):
     """ Returns a function that turns linked lists to strings.
