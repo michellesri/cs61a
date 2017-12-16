@@ -34,7 +34,19 @@ def make_to_string(front, mid, back, empty_repr):
     >>> jerrys_to_string(Link.empty)
     '()'
     """
-    "*** YOUR CODE HERE ***"
+    def inner(lnk):
+        arr = []
+        while lnk is not Link.empty:
+            arr.append(lnk.first)
+            lnk = lnk.rest
+        lnk_str = ''
+        for val in arr:
+            lnk_str += front + str(val) + mid
+        lnk_str += back + empty_repr
+        
+        return lnk_str
+    return inner
+            
 
 def tree_map(fn, t):
     """Maps the function fn over the entries of t and returns the
