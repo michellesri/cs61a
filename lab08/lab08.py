@@ -108,7 +108,15 @@ def add_trees(t1, t2):
         5
       5
     """
-    "*** YOUR CODE HERE ***"
+    if not t1:
+        return t2.copy_tree()
+    if not t2:
+        return t1.copy_tree()
+    new_label = t1.label + t2.label
+    t1_branches = t1.branches
+    t2_branches = t2.branches
+
+    
 
 # Link
 class Link:
