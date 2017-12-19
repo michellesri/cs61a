@@ -121,9 +121,9 @@ def add_trees(t1, t2):
     if length_t1 < length_t2:
         t1_branches += [None for _ in range(length_t1, length_t2)]
     elif length_t2 < length_t1:
-        t1_branches += [None for _ in range(length_t2, length_t1)]
+        t2_branches += [None for _ in range(length_t2, length_t1)]
     
-    # return Tree(new_label, )
+    return Tree(new_label, [add_trees(branch1, branch2) for branch1, branch2 in zip(t1_branches, t2_branches)])
 
 
     
