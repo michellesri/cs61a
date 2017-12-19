@@ -115,6 +115,16 @@ def add_trees(t1, t2):
     new_label = t1.label + t2.label
     t1_branches = t1.branches
     t2_branches = t2.branches
+    length_t1 = len(t1_branches)
+    length_t2 = len(t2_branches)
+    
+    if length_t1 < length_t2:
+        t1_branches += [None for _ in range(length_t1, length_t2)]
+    elif length_t2 < length_t1:
+        t1_branches += [None for _ in range(length_t2, length_t1)]
+    
+    # return Tree(new_label, )
+
 
     
 
