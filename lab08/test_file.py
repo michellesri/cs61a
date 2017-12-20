@@ -44,7 +44,7 @@ my_tree = Tree(5,
               )
 
 
-def breadth_first_search(t, target):
+def depth_first_search(t, target):
     print(t.label)
     if t.label == target:
         return True
@@ -52,11 +52,23 @@ def breadth_first_search(t, target):
     if t.is_leaf():
         return False
 
-    boolean_list = [breadth_first_search(t, target) for t in t.branches]
+    boolean_list = [depth_first_search(t, target) for t in t.branches]
 
     for val in boolean_list:
         if val == True:
             return True
     return False
 
-print(breadth_first_search(my_tree, 1))
+print(depth_first_search(my_tree, 1))
+
+def depth_first_search_count(t, target):
+    count = 0
+    def inner():
+        if t.label == target:
+            return count
+    return inner
+
+
+
+
+print(depth_first_search_count(my_tree, 1))
