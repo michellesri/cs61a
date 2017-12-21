@@ -31,3 +31,5 @@ def el(i, za):
 el(3, el)
 
 K = lambda x: lambda y: x
+K(3) # Function
+K(3)(2) # lambda
