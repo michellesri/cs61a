@@ -21,3 +21,14 @@ def collapse(n):
     # if the number is a single digit, return.
     if left == 0:
         return last
+    
+    # if the last is the same as the last digit on the left side
+        # then we have a duplicate. recurisvely call the fn
+            # with only the left side
+    elif last == left % 10:
+        return collapse(left)
+
+    #else, the number isn't a duplicate.
+        # keep it in the recursive call
+    else:
+        return collapse(left) * 10 + last
