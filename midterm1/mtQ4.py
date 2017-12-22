@@ -15,3 +15,5 @@ def collapse(n):
     >>> collapse(11200000013333)
     12013
     """
+    
+    left, last = n // 10, n % 10
