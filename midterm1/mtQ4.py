@@ -17,3 +17,7 @@ def collapse(n):
     """
     
     left, last = n // 10, n % 10
+    
+    # if the number is a single digit, return.
+    if left == 0:
+        return last
