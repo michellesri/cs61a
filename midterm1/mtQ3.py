@@ -18,3 +18,4 @@ def triangle(a, b, c):
     >>> triangle(2, 4, 2)
     False
     """
+    longest = max(a, b, c)
