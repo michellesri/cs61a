@@ -21,3 +21,5 @@ def triangle(a, b, c):
     longest = max(a, b, c)
     
     sum_of_others = a + b + c - longest # or min(a+b, a+c, b+c)
+    
+    return longest < sum_of_others
