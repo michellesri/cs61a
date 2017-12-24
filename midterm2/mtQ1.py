@@ -8,3 +8,8 @@ class Plant:
         if self.k > 3:
             Plant.name = lambda t: 'tree'
             Plant.k = 6
+            
+    def name(self):
+        return kind
+    
+    
