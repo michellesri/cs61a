@@ -18,3 +18,7 @@ class Plant:
     
 class Flower(Plant):
     kind = 'pretty'
+    
+    def __repr__(self):
+        s = self.smell() + ' '
+        return s + Plant.__repr__(self)
