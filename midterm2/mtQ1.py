@@ -15,3 +15,6 @@ class Plant:
     def __repr__(self):
         s = self.name() + ' '
         return s + str(self.k)
+    
+class Flower(Plant):
+    kind = 'pretty'
