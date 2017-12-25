@@ -32,3 +32,8 @@ class Rose(Flower):
     
     def smell(self):
         return 'nice'
+    
+class Garden:
+    def __init__(self, kind):
+        self.name = kind
+        self.smell = kind().smell
