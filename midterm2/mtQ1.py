@@ -22,3 +22,6 @@ class Flower(Plant):
     def __repr__(self):
         s = self.smell() + ' '
         return s + Plant.__repr__(self)
+    
+    def smell(self):
+        return 'bad'
