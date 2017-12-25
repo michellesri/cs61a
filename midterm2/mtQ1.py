@@ -12,4 +12,6 @@ class Plant:
     def name(self):
         return kind
     
-    
+    def __repr__(self):
+        s = self.name() + ' '
+        return s + str(self.k)
