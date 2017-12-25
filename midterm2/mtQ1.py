@@ -37,3 +37,9 @@ class Garden:
     def __init__(self, kind):
         self.name = kind
         self.smell = kind().smell
+    
+    def smell(self):
+        return self.name.kind
+    
+f1 = Flower()
+f2 = Flower()
