@@ -25,3 +25,7 @@ class Flower(Plant):
     
     def smell(self):
         return 'bad'
+    
+class Rose(Flower):
+    def name(self):
+        return 'rose'
