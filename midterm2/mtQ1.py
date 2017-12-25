@@ -43,3 +43,6 @@ class Garden:
     
 f1 = Flower()
 f2 = Flower()
+
+f1.name() # Error
+f1.k # 1
