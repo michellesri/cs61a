@@ -46,3 +46,6 @@ f2 = Flower()
 
 f1.name() # Error
 f1.k # 1
+Rose.k # 4
+Plant() # tree 4
+Rose() # nice rose 6
