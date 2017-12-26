@@ -49,3 +49,5 @@ f1.k # 1
 Rose.k # 4
 Plant() # tree 4
 Rose() # nice rose 6
+Garden(Flower).smell() # 'bad'
+Garden(Flower).name() # bad tree 6
