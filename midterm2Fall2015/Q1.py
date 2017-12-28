@@ -18,3 +18,7 @@ class Ok:
     def __str__(self):
         return str(self.ok)[:4]
     
+class Go(Ok):
+    def my(self, help):
+        return [help + 3, len(Ok.py)]
+    
