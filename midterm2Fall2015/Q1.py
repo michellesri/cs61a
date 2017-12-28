@@ -3,3 +3,18 @@
 # write the first 3. If an error occurs, write “Error”. If evaulation would run forever, write “Forever”.
 # The first two rows have been provided as examples.
 # Assume that you have started python3 and executed the following statements (which do not cause errors):
+
+class Ok:
+    py = [3.14]
+    
+    def __init__(self, py):
+        self.ok = self.py
+        Ok.py.append(3 * py)
+    
+    def my(self, eye):
+        print(self.my(eye))
+        return self.ok.pop()
+    
+    def __str__(self):
+        return str(self.ok)[:4]
+    
