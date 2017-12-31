@@ -20,5 +20,9 @@ class Ok:
     
 class Go(Ok):
     def my(self, help):
+        print(help)
         return [help + 3, len(Ok.py)]
     
+oh = Go(5)
+Go.py = [3,1,4]
+oh.no = {'just': Go(9)}
