@@ -22,9 +22,10 @@
 )
 
 (define (ordered? s)
-  'YOUR-CODE-HERE
+  (if (or (null? s) (null? (cdr s)))
+      true
+      (and (<= (car s) (cadr s)) (ordered? (cdr s))))
 )
-
 (define (nodots s)
   'YOUR-CODE-HERE
 )
