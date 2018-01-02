@@ -26,6 +26,7 @@
       true
       (and (<= (car s) (cadr s)) (ordered? (cdr s))))
 )
+
 (define (nodots s)
   'YOUR-CODE-HERE
 )
