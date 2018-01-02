@@ -42,9 +42,9 @@
 
 (define (contains? s v)
     (cond ((empty? s) #f)
-          (> (car s v) #f)
-          (= (car s v) #t)
-          (else contains (cdr s v))
+          ((> (car s) v) #f)
+          ((= (car s) v) #t)
+          ((< (car s) v) (contains? (cdr s) v))
           ))
 
 ; Equivalent Python code, for your reference:
