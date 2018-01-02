@@ -64,8 +64,9 @@
 
 (define (add s v)
     (cond ((empty? s) (list v))
-          'YOUR-CODE-HERE
-          (else nil) ; replace this line
+          ((contains? s v) s)
+          ((> (car s) v) (cons v s))
+          (else (cons (car s) (add (cdr s) v)))
           ))
 
 (define (intersect s t)
