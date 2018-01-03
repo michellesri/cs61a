@@ -19,7 +19,10 @@
 
 ; Q3
 (define (filter f lst)
-  'YOUR-CODE-HERE
+    (cond 
+      ((null? lst) '())
+      ((f (car lst))(cons (car lst) (filter f (cdr lst))))
+      (else (filter f (cdr lst))))
 )
 
 ;;; Tests
