@@ -33,7 +33,7 @@
 
 ; Q4
 (define (make-adder num)
-  'YOUR-CODE-HERE
+  (lambda (x) (+ x num))
 )
 
 ;;; Tests
