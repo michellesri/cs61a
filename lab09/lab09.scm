@@ -2,7 +2,9 @@
 
 ; Q2
 (define (over-or-under x y)
-  'YOUR-CODE-HERE
+  (if (< x y) -1)
+  (if (= x y) 0)
+  (if (> x y) 1)
 )
 
 ;;; Tests
