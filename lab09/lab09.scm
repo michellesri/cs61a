@@ -2,9 +2,11 @@
 
 ; Q2
 (define (over-or-under x y)
-  (if (< x y) -1)
-  (if (= x y) 0)
-  (if (> x y) 1)
+  (cond 
+    ((< x y) -1)
+    ((= x y) 0)
+    ((> x y) 1)
+  )
 )
 
 ;;; Tests
