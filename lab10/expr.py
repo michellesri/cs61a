@@ -110,7 +110,10 @@ class Name(Expr):
         ...     print('Exception raised!')
         Exception raised!
         """
-        "*** YOUR CODE HERE ***"
+        if self.string in env:
+            return env[self.string]
+        raise NameError("name '{}' is not defined".format(self.string))
+
 
     def __str__(self):
         return self.string
