@@ -131,6 +131,9 @@ class LambdaExpr(Expr):
     where `parameters` is the list ['x', 'y'] and `body` is the expression
     CallExpr('add', [Name('x'), Name('y')]).
     """
+    
+    # CallExpr(Name('add'), [Name('x'), Name('y')])
+    
     def __init__(self, parameters, body):
         Expr.__init__(self, parameters, body)
         self.parameters = parameters
@@ -158,6 +161,28 @@ class CallExpr(Expr):
 
     where `operator` is Name('add') and `operands` are [Literal(3), Literal(4)].
     """
+    
+    """"
+        3 + 4 * 5
+        
+        env: {
+            "add": lambda x, y: x + y
+        }
+        
+        CallExpr(
+            Name('add'), -> lambda x, y: x + y
+            [  
+                Literal(3), -> 3
+                CallExpr( -> 20
+                    Name('mul'), 
+                    [
+                        Literal(4), 
+                        Literal(5)
+                    ]
+                )
+            ]
+        )
+    """
     def __init__(self, operator, operands):
         Expr.__init__(self, operator, operands)
         self.operator = operator
@@ -180,7 +205,7 @@ class CallExpr(Expr):
         Number(14)
         """
         function = self.operator.eval(env)
-        arguments = [operand.eval(env) for operand in self.operands]
+        arguments = [operand.eval(env) for operand in self.operands] #[Number(3). Number(4)]
         return function.apply(arguments)
 
     def __str__(self):
