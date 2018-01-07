@@ -1,15 +1,78 @@
 (define (substitute s old new)
-  (cond ((null? s) nil)
-    ((pair? (car s)) (cons (substitute (car s) old new)
-                      (substitute (cdr s) old new)))
-    ((equal? (car s) old) (cons new
-                            (substitute (cdr s) old new)))
-      (else (cons (car s) (substitute (cdr s) old new))))
+  (cond 
+    ((null? s) 
+      nil
+    )
+    
+    ((pair? (car s)) 
+      (cons (substitute (car s) old new) (substitute (cdr s) old new))
+    )
+    
+    ((equal? (car s) old) 
+      (cons new (substitute (cdr s) old new))
+    )
+    
+    (else 
+      (cons (car s) (substitute (cdr s) old new))
+    )
+  )
 )
 
+(define (get-index-of s lst index)
+  (cond 
+    ((null? lst) -1)
+    ((pair? (car lst)) 
+      (cond 
+        ((= (get-index-of s (car lst) index) -1)
+          (get-index-of s (cdr lst) (+ (length (car lst) index)))
+        )
+        (else (get-index-of s (car lst) index))
+      )
+    )
+    ((equal? (car lst) s) 
+      index
+    )
+    (else
+      (get-index-of s (cdr lst) (+ index 1))
+    )
+  )
+)
+
+(define (get-item lst index)
+  (cond
+    ((null? lst) 
+      nil
+    )
+    ((pair? (car lst))
+      (cond
+        ((> (length (car lst)) index)
+          (get-item (car lst) index)
+        )
+        (else 
+          (get-item (cdr lst) (- index (length (car lst))))
+        )
+      )
+    )
+    ((= index 0) (car lst))
+    (else 
+      (get-item (cdr lst) (- index 1))
+    )
+  )
+)
 
 (define (sub-all s olds news)
-  'YOUR-CODE-HERE
+  (cond 
+    ((null? s) nil)
+    ((pair? (car s)) 
+      (cons (sub-all (car s) olds news) (sub-all (cdr s) olds news))
+    )
+    ((= (get-index-of (car s) olds 0) -1)
+      (cons (car s) (sub-all (cdr s) olds news))
+    )
+    (else
+      (cons (get-item news (get-index-of (car s) olds 0)) (sub-all (cdr s) olds news))
+    )
+  )
 )
 
 (define (cadr s) (car (cdr s)))
@@ -58,33 +121,48 @@
 (define (multiplicand p) (caddr p))
 
 (define (derive-sum expr var)
-  'YOUR-CODE-HERE
-  )
+  (make-sum (derive (cadr expr) var) (derive (caddr expr) var))
+  
+)
 
 (define (derive-product expr var)
-  'YOUR-CODE-HERE
+  (make-sum
+    (make-product (derive (cadr expr) var) (caddr expr))
+    (make-product (cadr expr) (derive (caddr expr) var))
   )
+)
 
 ; Exponentiations are represented as lists that start with ^.
 (define (make-exp base exponent)
-  'YOUR-CODE-HERE
+  (cond
+    ((= exponent 0) 1)
+    ((= exponent 1) base)
+    ((number? base) (expt base exponent))
+    (else (list '^ base exponent))
   )
+)
 
 (define (base exp)
-  'YOUR-CODE-HERE
-  )
+  (cadr exp)
+)
 
 (define (exponent exp)
-  'YOUR-CODE-HERE
-  )
+  (caddr exp)
+)
 
 (define (exp? exp)
-  'YOUR-CODE-HERE
-  )
+    (and (list? exp) (eq? (car exp) '^))
+)
 
 (define x^2 (make-exp 'x 2))
 (define x^3 (make-exp 'x 3))
 
 (define (derive-exp exp var)
-  'YOUR-CODE-HERE
+  (make-product 
+    (exponent exp) 
+    (make-exp
+      (base exp)
+      (- (exponent exp) 1)
+    )
   )
+)
