@@ -1,6 +1,19 @@
-(define (how-many-dots s)
-  'YOUR-CODE-HERE
+(define (how-many-dots s dot-count)
+  (cond
+    ((null? s)
+      nil
+    )
+    ((pair? (car s))
+      (how-many-dots (cdr s) dot-count)
+    )
+    ((number? (cdr s)
+      (how-many-dots (cdr s) (+ dot-count 1))
+    ))
+  )
 )
+
+// if it's not a pair, but there is
+a number after that, call fn again and increment dot-count
 
 ;;; Tests
 
